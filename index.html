@@ -7,52 +7,171 @@
   <meta name="description" content="919ADMIN PRO — A sleek, powerful FiveM admin menu. Experience a modern UI, blazing-fast tools, and pro-grade workflows." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <!-- jQuery CDN -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
+<script>
+    // Fetch Discord member count using the Server Widget API
+    // Server ID: 899518855167225856
+    (function(){
+      // Use the provided guild ID directly; avoid obfuscation that can create syntax issues
+      const SERVER_ID = '899518855167225856';
+      const WIDGET_URL = `https://discord.com/api/guilds/${SERVER_ID}/widget.json`;
+
+      function formatCount(n){
+        try{
+          if(n < 1000) return String(n);
+          if(n < 10000) return (n/1000).toFixed(1).replace(/\.0$/, '') + 'k';
+          return Math.round(n/1000) + 'k';
+        }catch{return String(n);}
+      }
+
+      function updateButtons(data){
+        const members = data?.presence_count || 0;
+        const countText = members ? ` ${members} others` : '';
+        // Header CTA
+        const headerSelector = 'a.btn.primary[data-discord-link="true"]';
+        document.querySelectorAll(headerSelector).forEach((el) => {
+          const base = 'Join ';
+          el.textContent = base + countText;
+          el.setAttribute('href', 'https://discord.gg/Xv7faqUXUf');
+          el.setAttribute('target', '_blank');
+          el.setAttribute('rel', 'noopener noreferrer');
+          el.setAttribute('aria-label', base + (members ? ` ${members} others` : ' our Discord'));
+        });
+        // Hero fancy CTA: update inline badge text
+        const heroCount = document.querySelector('.discord-cta .discord-cta__online');
+        if(heroCount){
+          heroCount.textContent = members ? `${formatCount(members)} online` : 'Online';
+          heroCount.setAttribute('aria-label', members ? `${members} online` : 'Online');
+        }
+      }
+
+      async function load(){
+        try{
+          const res = await fetch(WIDGET_URL, { cache: 'no-store' });
+          if(!res.ok) throw new Error('Widget fetch failed: ' + res.status);
+          const data = await res.json();
+          updateButtons(data);
+        }catch(err){
+          // Silent fail; keep default label
+        }
+      }
+
+      // Run after DOM is ready
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', load);
+      }else{
+        load();
+      }
+    })();
+  </script>
 <body class="animated-bg">
   <header>
     <div class="brand">
-      <div class="logo" aria-hidden="true"></div>
-      <h1>919ADMIN PRO</h1>
+      <img src="nineonenine.png" class="logo" aria-hidden="true" />
     </div>
     <nav class="nav" aria-label="Primary">
-      <button class="btn">Docs</button>
-      <button class="btn">Changelog</button>
-      <button class="btn primary">Get Early Access</button>
+            <a class="btn" href="https://store.nineonenine.design" target="_blank" rel="noopener noreferrer">Visit our Tebex</a>
+      <a class="btn primary" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer">Join our Discord</a>
     </nav>
   </header>
 
   <main>
     <section class="hero" aria-label="Hero">
       <div class="copy">
+        <div class="coming-soon" role="status" aria-label="Coming soon">
+          <span class="pill">Coming Soon</span>
+        </div>
         <h2 class="title">
-          Command your server with
-          <span class="gradient-text">precision</span>.
+          Manage <span class="fivem-text">FiveM</span> like a
+          <span class="gradient-text">PRO</span>.
         </h2>
         <p class="subtitle">
-          919ADMIN PRO is a next-gen FiveM admin menu built for speed, clarity, and control. Designed with a modern, reactive UI that feels as fast as you play.
+          <strong>919ADMIN PRO</strong> is a next-gen FiveM admin menu built for speed, clarity, and control. Designed with a modern, reactive UI that feels as fast as you play.
         </p>
-        <div class="feature-bullets" role="list">
-          <div class="feature" role="listitem">
-            <span class="dot" aria-hidden="true"></span>
-            Lightning-fast actions and streamlined workflows
+        <div class="feature-bullets carousel" role="list" aria-roledescription="carousel" aria-label="Key features">
+          <div class="carousel-track" style="transform: translateX(0%);" aria-live="polite">
+            <div class="carousel-page" role="group" aria-label="Features 1 to 4">
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Lightning-fast actions and streamlined workflows
+              </div>
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Clean, readable UI with pro-grade visibility
+              </div>
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Built for admins, optimized for performance
+              </div>
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Runs natively on ESX, QBCore, and Qbox
+              </div>
+            </div>
+
+            <div class="carousel-page" role="group" aria-label="Features 5 to 8">
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Hundreds of built-in actions and tools
+              </div>
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Fully customizable theme, colors and fonts
+              </div>
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Low-latency UI updates, even on busy servers
+              </div>
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Localized for multiple languages and extendable
+              </div>
+            </div>
+
+            <div class="carousel-page" role="group" aria-label="Features 9 to 12">
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Fully permissioned with UI-based access control
+              </div>
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Audit-friendly logs and clear confirmations
+              </div>
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Smooth animations tuned for performance
+              </div>
+              <div class="feature" role="listitem">
+                <span class="dot" aria-hidden="true"></span>
+                Designed for clarity under pressure
+              </div>
+            </div>
           </div>
-          <div class="feature" role="listitem">
-            <span class="dot" aria-hidden="true"></span>
-            Clean, readable UI with pro-grade visibility
-          </div>
-          <div class="feature" role="listitem">
-            <span class="dot" aria-hidden="true"></span>
-            Built for admins, optimized for performance
+          <div class="carousel-dots" role="tablist" aria-label="Feature pages">
+            <button class="carousel-dot is-active" role="tab" aria-selected="true" aria-controls="features-page-1" data-index="0"><span class="visually-hidden">Page 1</span></button>
+            <button class="carousel-dot" role="tab" aria-selected="false" aria-controls="features-page-2" data-index="1"><span class="visually-hidden">Page 2</span></button>
+            <button class="carousel-dot" role="tab" aria-selected="false" aria-controls="features-page-3" data-index="2"><span class="visually-hidden">Page 3</span></button>
           </div>
         </div>
         <div class="cta-row">
-          <button class="btn primary">Join the Beta</button>
-          <button class="btn">Preview Commands</button>
-          <button class="btn">Contact</button>
+          <a class="discord-cta" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
+            <span class="discord-cta__glow" aria-hidden="true"></span>
+            <span class="discord-cta__inner">
+              <span class="discord-cta__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+                  <path fill="currentColor" d="M20.317 4.369A18.2 18.2 0 0 0 16.558 3c-.18.32-.39.75-.533 1.09a16.3 16.3 0 0 0-4.05 0A8.3 8.3 0 0 0 11.442 3c-1.385.253-2.73.686-3.759 1.369C4.95 7.71 4.34 10.96 4.585 14.17c1.577 1.177 3.11 1.893 4.612 2.367.372-.51.704-1.055.991-1.63-.55-.21-1.079-.466-1.58-.764c.132-.098.262-.199.388-.303 3.027 1.42 6.317 1.42 9.314 0 .127.104.257.205.389.303-.5.298-1.03.554-1.58.764.287.576.619 1.12.991 1.63 1.503-.474 3.035-1.19 4.613-2.367.378-4.72-.644-7.93-3.307-9.801z"/>
+                  <circle cx="11.08" cy="10.39" r="1.66" fill="blue"/>
+                  <circle cx="16.22" cy="10.39" r="1.66" fill="blue"/>
+                </svg>
+              </span>
+              <span class="discord-cta__label">Join Discord</span>
+              <span class="discord-cta__online" data-discord-online="count" aria-live="polite">Online</span>
+            </span>
+          </a>
         </div>
       </div>
 
@@ -103,7 +222,7 @@
     </main>
 
   <footer>
-    © 2025 919ADMIN — FiveM Admin Menu. All rights reserved.
+    © 2025 919DESIGN — FiveM Server Management Products. All rights reserved.
   </footer>
 
   <!-- Modal for full-size screenshot preview -->
@@ -268,6 +387,132 @@
           if(e.target === $modal[0]) closeModal();
         });
       })();
+    })();
+
+    // Features carousel (three pages of 4 bullets)
+    (function(){
+      const root = document.querySelector('.feature-bullets.carousel');
+      if(!root) return;
+      const track = root.querySelector('.carousel-track');
+      const pages = Array.from(root.querySelectorAll('.carousel-page'));
+      const dots = Array.from(root.querySelectorAll('.carousel-dot'));
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let idx = 0;
+      let animating = false;
+      let autoTimer = null;
+
+      function setActiveDot(i){
+        dots.forEach((d, n) => {
+          d.classList.toggle('is-active', n === i);
+          d.setAttribute('aria-selected', n === i ? 'true' : 'false');
+        });
+      }
+
+      function goTo(i, direction = 0){
+        if(animating) return;
+        const count = pages.length;
+        const next = (i + count) % count;
+        animating = true;
+
+        // swipe animation using translateX percentages
+        const currentX = -idx * 100;
+        const targetX = -next * 100;
+
+        // if reduced motion, jump
+        if(prefersReduced){
+          track.style.transition = 'none';
+          track.style.transform = `translateX(${targetX}%)`;
+          idx = next;
+          setActiveDot(idx);
+          animating = false;
+          return;
+        }
+
+        track.style.transition = 'transform 420ms cubic-bezier(.22,.61,.36,1)';
+        // optional tiny pre-offset to emphasize swipe direction
+        if(direction !== 0){
+          // no pre-offset wrapper needed; just set target
+        }
+        requestAnimationFrame(() => {
+          track.style.transform = `translateX(${targetX}%)`;
+        });
+
+        const onEnd = () => {
+          track.removeEventListener('transitionend', onEnd);
+          track.style.transition = '';
+          idx = next;
+          setActiveDot(idx);
+          animating = false;
+        };
+        track.addEventListener('transitionend', onEnd, { once: true });
+      }
+
+      function next(){ goTo(idx + 1, 1); }
+      function prev(){ goTo(idx - 1, -1); }
+
+      // dots click
+      dots.forEach(d => {
+        d.addEventListener('click', () => {
+          const n = Number(d.dataset.index || '0');
+          goTo(n, n > idx ? 1 : -1);
+        });
+      });
+
+      // keyboard support
+      root.addEventListener('keydown', (e) => {
+        if(e.key === 'ArrowRight') next();
+        else if(e.key === 'ArrowLeft') prev();
+      });
+      root.setAttribute('tabindex', '0');
+
+      // touch/swipe
+      let startX=0, startY=0, dragging=false;
+      root.addEventListener('touchstart', (e) => {
+        if(e.touches.length !== 1) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        dragging = true;
+      }, { passive: true });
+
+      root.addEventListener('touchmove', (e) => {
+        if(!dragging) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 24){
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      root.addEventListener('touchend', (e) => {
+        if(!dragging) return;
+        const endX = (e.changedTouches && e.changedTouches[0].clientX) || startX;
+        const dx = endX - startX;
+        dragging = false;
+        if(Math.abs(dx) > 40){
+          if(dx < 0) next(); else prev();
+        }
+      });
+
+      // auto-rotate
+      function startAuto(){
+        stopAuto();
+        autoTimer = setInterval(next, 5000);
+      }
+      function stopAuto(){
+        if(autoTimer){ clearInterval(autoTimer); autoTimer = null; }
+      }
+      startAuto();
+
+      // pause on hover/focus
+      root.addEventListener('mouseenter', stopAuto);
+      root.addEventListener('mouseleave', startAuto);
+      root.addEventListener('focusin', stopAuto);
+      root.addEventListener('focusout', startAuto);
+
+      // initialize
+      setActiveDot(0);
+      track.style.transform = 'translateX(0%)';
     })();
   </script>
 </body>
