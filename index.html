@@ -41,12 +41,12 @@
           el.setAttribute('rel', 'noopener noreferrer');
           el.setAttribute('aria-label', base + (members ? ` ${members} others` : ' our Discord'));
         });
-        // Hero fancy CTA: update inline badge text
-        const heroCount = document.querySelector('.discord-cta .discord-cta__online');
-        if(heroCount){
-          heroCount.textContent = members ? `${formatCount(members)} online` : 'Online';
-          heroCount.setAttribute('aria-label', members ? `${members} online` : 'Online');
-        }
+         // Hero fancy CTA: update inline badge text (support multiple instances)
+         const heroCounts = document.querySelectorAll('.discord-cta .discord-cta__online');
+         heroCounts.forEach((el) => {
+           el.textContent = members ? `${formatCount(members)} online` : 'Online';
+           el.setAttribute('aria-label', members ? `${members} online` : 'Online');
+         });
       }
 
       async function load(){
@@ -196,7 +196,130 @@
       </div>
     </section>
 
-    <!-- Framework logos band (moved directly under hero) -->
+    <!-- Product demo hero -->
+    <section class="hero" aria-label="Live demo">
+      <div class="video-frame" aria-label="919ADMIN PRO video demo">
+        <video src="919AdminPlayerDemo.mp4" autoplay muted playsinline loop controls poster="ss1.png"></video>
+      </div>
+      <div class="copy">
+        <div class="coming-soon" role="status" aria-label="Live demo">
+          <span class="pill">Feature Preview</span>
+        </div>
+        <h2 class="title">
+          Help <span class="fivem-text">Players</span> like a 
+          <span class="gradient-text">PRO</span>.
+        </h2>
+        <p class="subtitle">
+          <strong>919ADMIN PRO</strong> puts player management at your fingertips: find players instantly, change jobs and grades and more in one click, and run a curated, role‑aware catalog of actions—safely and fast.
+        </p>
+        <div class="feature-bullets" role="list" aria-label="Player management highlights">
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Instant search and filter across online players</div>
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> One‑click job and grade changes with server‑safe apply</div>
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Action catalog with favorites, recents, and quick keys</div>
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Role‑aware visibility, confirmations, reasons, and audit logs</div>
+        </div>
+        <div class="cta-row">
+          <a class="discord-cta" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
+            <span class="discord-cta__glow" aria-hidden="true"></span>
+            <span class="discord-cta__inner">
+              <span class="discord-cta__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+                  <path fill="currentColor" d="M20.317 4.369A18.2 18.2 0 0 0 16.558 3c-.18.32-.39.75-.533 1.09a16.3 16.3 0 0 0-4.05 0A8.3 8.3 0 0 0 11.442 3c-1.385.253-2.73.686-3.759 1.369C4.95 7.71 4.34 10.96 4.585 14.17c1.577 1.177 3.11 1.893 4.612 2.367.372-.51.704-1.055.991-1.63-.55-.21-1.079-.466-1.58-.764c.132-.098.262-.199.388-.303 3.027 1.42 6.317 1.42 9.314 0 .127.104.257.205.389.303-.5.298-1.03.554-1.58.764.287.576.619 1.12.991 1.63 1.503-.474 3.035-1.19 4.613-2.367.378-4.72-.644-7.93-3.307-9.801z"/>
+                  <circle cx="11.08" cy="10.39" r="1.66" fill="blue"/>
+                  <circle cx="16.22" cy="10.39" r="1.66" fill="blue"/>
+                </svg>
+              </span>
+              <span class="discord-cta__label">Join Discord</span>
+              <span class="discord-cta__online" data-discord-online="count" aria-live="polite">Online</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Items tools hero -->
+    <section class="hero" aria-label="Items tools preview">
+      <div class="copy">
+        <div class="coming-soon" role="status" aria-label="Feature preview">
+          <span class="pill">Feature Preview</span>
+        </div>
+        <h2 class="title">
+          Spawn <span class="fivem-text">Items</span> like a
+          <span class="gradient-text">PRO</span>.
+        </h2>
+        <p class="subtitle">
+          <strong>919ADMIN PRO</strong> gives admins instant item access: full item search, click to spawn to self, and <strong>Shift‑click</strong> to give to any player — all optimized with dynamic scrolling loading for high‑performance lists.
+        </p>
+        <div class="feature-bullets" role="list" aria-label="Items tools highlights">
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Full item search for fast discovery</div>
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Click to spawn to self; <strong>Shift‑click</strong> to give to player</div>
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Dynamic scrolling loading for ultra‑large lists</div>
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Clean, keyboard‑friendly navigation</div>
+        </div>
+        <div class="cta-row">
+          <a class="discord-cta" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
+            <span class="discord-cta__glow" aria-hidden="true"></span>
+            <span class="discord-cta__inner">
+              <span class="discord-cta__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+                  <path fill="currentColor" d="M20.317 4.369A18.2 18.2 0 0 0 16.558 3c-.18.32-.39.75-.533 1.09a16.3 16.3 0 0 0-4.05 0A8.3 8.3 0 0 0 11.442 3c-1.385.253-2.73.686-3.759 1.369C4.95 7.71 4.34 10.96 4.585 14.17c1.577 1.177 3.11 1.893 4.612 2.367.372-.51.704-1.055.991-1.63-.55-.21-1.079-.466-1.58-.764c.132-.098.262-.199.388-.303 3.027 1.42 6.317 1.42 9.314 0 .127.104.257.205.389.303-.5.298-1.03.554-1.58.764.287.576.619 1.12.991 1.63 1.503-.474 3.035-1.19 4.613-2.367.378-4.72-.644-7.93-3.307-9.801z"/>
+                  <circle cx="11.08" cy="10.39" r="1.66" fill="blue"/>
+                  <circle cx="16.22" cy="10.39" r="1.66" fill="blue"/>
+                </svg>
+              </span>
+              <span class="discord-cta__label">Join Discord</span>
+              <span class="discord-cta__online" data-discord-online="count" aria-live="polite">Online</span>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="video-frame" aria-label="919ADMIN PRO items demo">
+        <video src="919AdminItemsDemo.mp4" autoplay muted playsinline loop controls poster="ss2.png"></video>
+      </div>
+    </section>
+
+    <!-- Permissions hero -->
+    <section class="hero" aria-label="Permissions preview">
+      <div class="video-frame" aria-label="919ADMIN PRO permissions demo">
+        <video src="919AdminPermsDemo.mp4" autoplay muted playsinline loop controls poster="ss3.png"></video>
+      </div>
+      <div class="copy">
+        <div class="coming-soon" role="status" aria-label="Feature preview">
+          <span class="pill">Feature Preview</span>
+        </div>
+        <h2 class="title">
+          Control <span class="fivem-text">Permissions</span> like a
+          <span class="gradient-text">PRO</span>.
+        </h2>
+        <p class="subtitle">
+          A graphical, <strong>fully granular</strong> permissions system. Create custom <strong>permission groups</strong>, grant exactly what each role can do, and assign them in seconds. A default <strong>SuperAdmin</strong> group with full access is included, and <strong>Discord permissions</strong> are supported.
+        </p>
+        <div class="feature-bullets" role="list" aria-label="Permissions highlights">
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Granular toggles for every capability</div>
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Create and assign custom permission groups</div>
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Default SuperAdmin group with full access</div>
+          <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Discord roles/IDs support for access control</div>
+        </div>
+        <div class="cta-row">
+          <a class="discord-cta" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
+            <span class="discord-cta__glow" aria-hidden="true"></span>
+            <span class="discord-cta__inner">
+              <span class="discord-cta__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+                  <path fill="currentColor" d="M20.317 4.369A18.2 18.2 0 0 0 16.558 3c-.18.32-.39.75-.533 1.09a16.3 16.3 0 0 0-4.05 0A8.3 8.3 0 0 0 11.442 3c-1.385.253-2.73.686-3.759 1.369C4.95 7.71 4.34 10.96 4.585 14.17c1.577 1.177 3.11 1.893 4.612 2.367.372-.51.704-1.055.991-1.63-.55-.21-1.079-.466-1.58-.764c.132-.098.262-.199.388-.303 3.027 1.42 6.317 1.42 9.314 0 .127.104.257.205.389.303-.5.298-1.03.554-1.58.764.287.576.619 1.12.991 1.63 1.503-.474 3.035-1.19 4.613-2.367.378-4.72-.644-7.93-3.307-9.801z"/>
+                  <circle cx="11.08" cy="10.39" r="1.66" fill="blue"/>
+                  <circle cx="16.22" cy="10.39" r="1.66" fill="blue"/>
+                </svg>
+              </span>
+              <span class="discord-cta__label">Join Discord</span>
+              <span class="discord-cta__online" data-discord-online="count" aria-live="polite">Online</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Framework logos band (moved under fourth hero) -->
     <section class="frameworks" aria-label="Supported frameworks">
       <div class="frameworks__inner">
         <img src="esx.png" alt="ESX" class="frameworks__logo" />

@@ -100,18 +100,33 @@ header{
 
 main{
   position:relative;
-  padding-top: 92px;
+  padding-top: 120px; /* more space below fixed header */
 }
 
 .hero{
-  min-height: calc(100vh - 92px);
+  min-height: calc(100vh - 120px);
   display:grid;
   align-items:center;
   grid-template-columns: minmax(280px, 1.1fr) minmax(320px, 1.2fr);
   gap:42px;
-  padding: 36px 24px 72px;
+  padding: 54px 24px 96px; /* push content down and add bottom air */
   max-width: 1200px;
   margin: 0 auto;
+}
+
+/* Additional vertical rhythm between hero sections */
+.hero + .hero{
+  margin-top: clamp(20px, 6vw, 100px);
+}
+
+/* Slightly reduce spacing before the Items tools hero */
+.hero + .hero[aria-label="Items tools preview"]{
+  margin-top: clamp(12px, 4vw, 64px);
+}
+
+/* Keep generous spacing before the permissions hero */
+.hero + .hero[aria-label="Permissions preview"]{
+  margin-top: clamp(32px, 10vw, 160px);
 }
 
 .title{
@@ -353,6 +368,31 @@ a.discord-cta:active{ transform: translateY(0); }
   min-height: 340px;
 }
 
+/* Video frame styling to match visual language */
+.video-frame{
+  position: relative;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  box-shadow: 0 10px 30px rgba(0,0,0,0.30);
+  overflow: hidden;
+}
+.video-frame::before{
+  content: "";
+  position: absolute; inset: -10px;
+  border-radius: 18px;
+  background:
+    radial-gradient(60% 40% at 50% 0%, rgba(124,77,255,0.12), transparent 60%),
+    radial-gradient(60% 40% at 50% 100%, rgba(0,229,255,0.08), transparent 60%);
+  filter: blur(14px);
+  pointer-events: none;
+}
+.video-frame video{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .glow-ring{
   position:absolute; inset: -20px -20px -40px -20px;
   background:
@@ -480,7 +520,7 @@ footer{
 /* Framework logos band – visually harmonized with .info tiles */
 .frameworks{
   position: relative;
-  margin: 28px auto 0;
+  margin: 120px auto 0;
   padding: 0 24px;                    /* match .info side padding */
   max-width: 1100px;                  /* align with .info width */
 }
