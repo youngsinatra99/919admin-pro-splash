@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>919ADMIN PRO — Forum Header (1920x1080)</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            :root{ --frameShadow: 0 30px 80px rgba(0,0,0,0.45); }
+
+            html, body{ height: 100%; }
+            body{
+                margin: 0;
+                display: grid;
+                place-items: center;
+                background: #090d16;
+                font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            }
+
+            /* Exact 1920x1080 canvas */
+            .header-frame{
+                width: 1920px;
+                height: 1080px;
+                position: relative;
+                overflow: hidden;
+                color: var(--text);
+                background:
+                    radial-gradient(1200px 800px at 20% -10%, #121a2f 0%, transparent 60%),
+                    radial-gradient(1100px 700px at 120% 20%, #1b1030 0%, transparent 60%),
+                    linear-gradient(180deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
+                box-shadow: var(--frameShadow);
+            }
+
+            /* Decorative glow layers inside the frame */
+            .header-frame::before,
+            .header-frame::after{
+                content: "";
+                position: absolute;
+                inset: -6%;
+                pointer-events: none;
+                background:
+                    radial-gradient(600px 360px at 20% 10%, rgba(124,77,255,0.14), transparent 60%),
+                    radial-gradient(520px 330px at 80% 20%, rgba(0,229,255,0.12), transparent 60%),
+                    radial-gradient(660px 420px at 50% 100%, rgba(255,61,127,0.10), transparent 60%);
+                filter: blur(14px);
+                mix-blend-mode: screen;
+                z-index: 0;
+            }
+            .header-frame::after{ opacity: 0.5; }
+
+            /* Grid layout mimicking hero */
+            .header-inner{
+                position: relative;
+                z-index: 1;
+                display: grid;
+                grid-template-columns: 1.05fr 1.2fr;
+                align-items: center;
+                gap: 48px;
+                padding: 100px 120px; /* breathing room within the canvas */
+                width: 100%;
+                height: 100%;
+            }
+
+            /* Lift the left-side copy higher without affecting the artwork */
+            .header-copy{
+                align-self: start;
+                transform: translateY(140px);
+            }
+
+            .header-copy .title{ font-size: 120px; line-height: 1.02; margin: 0 0 16px; }
+            .header-copy .subtitle{ font-size: 34px; line-height: 1.4; margin: 0 0 26px; color: var(--muted); font-weight: 600; }
+
+            .badge{
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 12px 16px;
+                font-size: 22px;
+                font-weight: 800;
+                letter-spacing: 0.4px;
+                color: #fff;
+                border-radius: 999px;
+                border: 1px solid rgba(255,255,255,0.16);
+                background:
+                    radial-gradient(120% 200% at 0% 0%, rgba(124,77,255,0.35), transparent 38%),
+                    radial-gradient(120% 200% at 100% 100%, rgba(0,229,255,0.28), transparent 42%),
+                    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+                box-shadow: 0 6px 22px rgba(124,77,255,0.28), inset 0 0 0 1px rgba(255,255,255,0.06);
+                margin-bottom: 22px;
+            }
+            .badge::before{
+                content: "";
+                width: 6px; height: 6px; border-radius: 50%;
+                background: radial-gradient(circle at 30% 30%, #fff, #a5eaff 30%, #07d5ff 70%);
+                box-shadow: 0 0 12px rgba(7,213,255,0.6);
+            }
+
+            .header-art{
+                position: relative;
+                display: grid;
+                place-items: center;
+            }
+            .header-art .art-glow{
+                position: absolute;
+                inset: -40px -40px -80px -40px;
+                background:
+                    radial-gradient(520px 200px at 50% 35%, rgba(0,229,255,0.14), transparent 55%),
+                    radial-gradient(500px 200px at 50% 70%, rgba(124,77,255,0.14), transparent 52%);
+                filter: blur(16px);
+                mix-blend-mode: screen;
+                z-index: 0;
+            }
+
+            .header-art .screenshot{
+                position: relative;
+                z-index: 1;
+                width: 1100px;
+                max-width: 100%;
+                height: auto;
+                border-radius: 16px;
+                border: 1px solid rgba(255,255,255,0.10);
+                box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04) inset;
+                display: block;
+                object-fit: contain;
+                background: #0a0f1a;
+                transition: opacity 800ms ease;
+            }
+            .header-art .screenshot.fade-out{ opacity: 0; }
+            @media (prefers-reduced-motion: reduce){
+                .header-art .screenshot{ transition: none !important; }
+            }
+
+            .framework-band{
+                position: absolute;
+                left: 120px; right: 120px; bottom: 280px;
+                display: flex;
+                align-items: center; justify-content: space-between;
+                gap: 18px;
+            }
+            .framework-band .logos{
+                display: flex; align-items: center; gap: 32px;
+                padding: 14px 16px;
+                border-radius: 14px;
+                border: 1px solid var(--border);
+                background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+            }
+            .framework-band .logos img{
+                height: 70px; width: auto; opacity: 0.6; filter: grayscale(1);
+            }
+            .framework-band .logos img:hover{ opacity: 0.75; filter: grayscale(0.2); }
+
+            .brand-mark{
+                color: #9bb1cc; font-weight: 700; letter-spacing: 0.4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header-frame">
+            <div class="header-inner">
+                <div class="header-copy">
+                    <!--<span class="badge">Release</span>-->
+                    <h2 class="title">
+                        919ADMIN <span class="fivem-text">PRO</span>
+                    </h2>
+                    <p class="subtitle">
+                        A modern, blazing‑fast <strong>FiveM admin menu</strong> for clarity and control.
+                        Built for ESX, QBCore, and Qbox.
+                    </p>
+                    
+                </div>
+                <div class="header-art">
+                    <div class="art-glow" aria-hidden="true"></div>
+                    <img class="screenshot" src="ss1.png" alt="919ADMIN PRO screenshot" />
+                </div>
+            </div>
+
+            <div class="framework-band">
+                <div class="logos">
+                    <img src="esx.png" alt="ESX" />
+                    <img src="qbcore.png" alt="QBCore" />
+                    <img src="qbox.png" alt="Qbox" />
+                </div>
+            </div>
+        </div>
+        <script>
+            (function(){
+                const screenshots = [
+                    'ss1.png',
+                    'ss2.png',
+                    'ss3.png'
+                ];
+                const img = document.querySelector('.header-art .screenshot');
+                if(!img) return;
+                let idx = 0;
+                function next(){
+                    idx = (idx + 1) % screenshots.length;
+                    // fade out, swap src, fade in
+                    img.classList.add('fade-out');
+                    const swap = () => {
+                        img.removeEventListener('transitionend', swap);
+                        img.src = screenshots[idx];
+                        // allow browser to apply DOM update
+                        requestAnimationFrame(() => {
+                            img.classList.remove('fade-out');
+                        });
+                    };
+                    img.addEventListener('transitionend', swap, { once: true });
+                }
+                setInterval(next, 3000);
+            })();
+        </script>
+    </body>
+</html>
+
+
