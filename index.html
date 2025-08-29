@@ -77,13 +77,46 @@
       }
     })();
   </script>
+  <script>
+    // Performance: pause autoplaying videos when off-screen
+    (function(){
+      function handle(entries){
+        entries.forEach((entry) => {
+          const vid = entry.target;
+          if(!(vid instanceof HTMLVideoElement)) return;
+          if(entry.isIntersecting){
+            if(vid.dataset.wasPaused !== 'true' && vid.paused){
+              try{ vid.play(); }catch{}
+            }
+          }else{
+            vid.dataset.wasPaused = String(vid.paused);
+            try{ vid.pause(); }catch{}
+          }
+        });
+      }
+      const obs = new IntersectionObserver(handle, { rootMargin: '0px 0px -20% 0px', threshold: 0.1 });
+      function init(){
+        document.querySelectorAll('video[autoplay]').forEach(v => obs.observe(v));
+        document.addEventListener('visibilitychange', () => {
+          const hidden = document.hidden;
+          document.querySelectorAll('video').forEach(v => { try{ hidden ? v.pause() : (v.dataset.wasPaused !== 'true' && v.play()); }catch{} });
+        });
+      }
+      if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', init); } else { init(); }
+    })();
+  </script>
 <body class="animated-bg">
   <header>
     <div class="brand">
       <img src="nineonenine.png" class="logo" aria-hidden="true" />
     </div>
     <nav class="nav" aria-label="Primary">
-            <a class="btn" href="https://store.nineonenine.design" target="_blank" rel="noopener noreferrer">Visit our Tebex</a>
+            <a class="gold-cta" href="https://store.nineonenine.design/category/919-admin-pro" role="button" aria-label="Purchase now">
+              <span class="gold-cta__glow" aria-hidden="true"></span>
+              <span class="gold-cta__inner">
+                <span class="gold-cta__label">PURCHASE NOW</span>
+              </span>
+            </a>
       <a class="btn primary" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer">Join our Discord</a>
     </nav>
   </header>
@@ -91,8 +124,8 @@
   <main>
     <section class="hero" aria-label="Hero">
       <div class="copy">
-        <div class="coming-soon" role="status" aria-label="Releases August 29th, 2025">
-          <span class="pill">Releases <span class="fivem-text">August 29th, 2025</span></span>
+        <div class="coming-soon" role="status" aria-label="NOW AVAILABLE">
+          <span class="pill is-available">NOW AVAILABLE</span>
         </div>
         <h2 class="title">
           Manage <span class="fivem-text">FiveM</span> like a
@@ -167,6 +200,12 @@
           </div>
         </div>
         <div class="cta-row">
+          <a class="gold-cta" href="https://store.nineonenine.design/category/919-admin-pro" role="button" aria-label="Purchase now">
+            <span class="gold-cta__glow" aria-hidden="true"></span>
+            <span class="gold-cta__inner">
+              <span class="gold-cta__label">PURCHASE NOW</span>
+            </span>
+          </a>
           <a class="discord-cta" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
             <span class="discord-cta__glow" aria-hidden="true"></span>
             <span class="discord-cta__inner">
@@ -208,7 +247,7 @@
     <!-- Product demo hero -->
     <section class="hero" aria-label="Live demo">
       <div class="video-frame" aria-label="919ADMIN PRO video demo">
-        <video src="919AdminPlayerDemo.mp4" autoplay muted playsinline loop controls poster="ss1.png"></video>
+        <video src="919AdminPlayerDemo.mp4" autoplay muted playsinline loop controls poster="ss1.png" loading="lazy"></video>
       </div>
       <div class="copy">
         <div class="coming-soon" role="status" aria-label="Live demo">
@@ -226,22 +265,6 @@
           <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> One‑click job and grade changes with server‑safe apply</div>
           <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Action catalog with favorites, recents, and quick keys</div>
           <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Role‑aware visibility, confirmations, reasons, and audit logs</div>
-        </div>
-        <div class="cta-row">
-          <a class="discord-cta" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
-            <span class="discord-cta__glow" aria-hidden="true"></span>
-            <span class="discord-cta__inner">
-              <span class="discord-cta__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
-                  <path fill="currentColor" d="M20.317 4.369A18.2 18.2 0 0 0 16.558 3c-.18.32-.39.75-.533 1.09a16.3 16.3 0 0 0-4.05 0A8.3 8.3 0 0 0 11.442 3c-1.385.253-2.73.686-3.759 1.369C4.95 7.71 4.34 10.96 4.585 14.17c1.577 1.177 3.11 1.893 4.612 2.367.372-.51.704-1.055.991-1.63-.55-.21-1.079-.466-1.58-.764c.132-.098.262-.199.388-.303 3.027 1.42 6.317 1.42 9.314 0 .127.104.257.205.389.303-.5.298-1.03.554-1.58.764.287.576.619 1.12.991 1.63 1.503-.474 3.035-1.19 4.613-2.367.378-4.72-.644-7.93-3.307-9.801z"/>
-                  <circle cx="11.08" cy="10.39" r="1.66" fill="blue"/>
-                  <circle cx="16.22" cy="10.39" r="1.66" fill="blue"/>
-                </svg>
-              </span>
-              <span class="discord-cta__label">Join Discord</span>
-              <span class="discord-cta__online" data-discord-online="count" aria-live="polite">Online</span>
-            </span>
-          </a>
         </div>
       </div>
     </section>
@@ -265,32 +288,16 @@
           <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Dynamic scrolling loading for ultra‑large lists</div>
           <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Clean, keyboard‑friendly navigation</div>
         </div>
-        <div class="cta-row">
-          <a class="discord-cta" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
-            <span class="discord-cta__glow" aria-hidden="true"></span>
-            <span class="discord-cta__inner">
-              <span class="discord-cta__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
-                  <path fill="currentColor" d="M20.317 4.369A18.2 18.2 0 0 0 16.558 3c-.18.32-.39.75-.533 1.09a16.3 16.3 0 0 0-4.05 0A8.3 8.3 0 0 0 11.442 3c-1.385.253-2.73.686-3.759 1.369C4.95 7.71 4.34 10.96 4.585 14.17c1.577 1.177 3.11 1.893 4.612 2.367.372-.51.704-1.055.991-1.63-.55-.21-1.079-.466-1.58-.764c.132-.098.262-.199.388-.303 3.027 1.42 6.317 1.42 9.314 0 .127.104.257.205.389.303-.5.298-1.03.554-1.58.764.287.576.619 1.12.991 1.63 1.503-.474 3.035-1.19 4.613-2.367.378-4.72-.644-7.93-3.307-9.801z"/>
-                  <circle cx="11.08" cy="10.39" r="1.66" fill="blue"/>
-                  <circle cx="16.22" cy="10.39" r="1.66" fill="blue"/>
-                </svg>
-              </span>
-              <span class="discord-cta__label">Join Discord</span>
-              <span class="discord-cta__online" data-discord-online="count" aria-live="polite">Online</span>
-            </span>
-          </a>
-        </div>
       </div>
       <div class="video-frame" aria-label="919ADMIN PRO items demo">
-        <video src="919AdminItemsDemo.mp4" autoplay muted playsinline loop controls poster="ss2.png"></video>
+        <video src="919AdminItemsDemo.mp4" autoplay muted playsinline loop controls poster="ss2.png" loading="lazy"></video>
       </div>
     </section>
 
     <!-- Permissions hero -->
     <section class="hero" aria-label="Permissions preview">
       <div class="video-frame" aria-label="919ADMIN PRO permissions demo">
-        <video src="919AdminPermsDemo.mp4" autoplay muted playsinline loop controls poster="ss3.png"></video>
+        <video src="919AdminPermsDemo.mp4" autoplay muted playsinline loop controls poster="ss3.png" loading="lazy"></video>
       </div>
       <div class="copy">
         <div class="coming-soon" role="status" aria-label="Feature preview">
@@ -308,22 +315,6 @@
           <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Create and assign custom permission groups</div>
           <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Default SuperAdmin group with full access</div>
           <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Discord roles/IDs support for access control</div>
-        </div>
-        <div class="cta-row">
-          <a class="discord-cta" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">
-            <span class="discord-cta__glow" aria-hidden="true"></span>
-            <span class="discord-cta__inner">
-              <span class="discord-cta__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
-                  <path fill="currentColor" d="M20.317 4.369A18.2 18.2 0 0 0 16.558 3c-.18.32-.39.75-.533 1.09a16.3 16.3 0 0 0-4.05 0A8.3 8.3 0 0 0 11.442 3c-1.385.253-2.73.686-3.759 1.369C4.95 7.71 4.34 10.96 4.585 14.17c1.577 1.177 3.11 1.893 4.612 2.367.372-.51.704-1.055.991-1.63-.55-.21-1.079-.466-1.58-.764c.132-.098.262-.199.388-.303 3.027 1.42 6.317 1.42 9.314 0 .127.104.257.205.389.303-.5.298-1.03.554-1.58.764.287.576.619 1.12.991 1.63 1.503-.474 3.035-1.19 4.613-2.367.378-4.72-.644-7.93-3.307-9.801z"/>
-                  <circle cx="11.08" cy="10.39" r="1.66" fill="blue"/>
-                  <circle cx="16.22" cy="10.39" r="1.66" fill="blue"/>
-                </svg>
-              </span>
-              <span class="discord-cta__label">Join Discord</span>
-              <span class="discord-cta__online" data-discord-online="count" aria-live="polite">Online</span>
-            </span>
-          </a>
         </div>
       </div>
     </section>
@@ -634,7 +625,10 @@
       function stopAuto(){
         if(autoTimer){ clearInterval(autoTimer); autoTimer = null; }
       }
+      // auto-rotate with page visibility awareness
+      function onVisibility(){ document.hidden ? stopAuto() : startAuto(); }
       startAuto();
+      document.addEventListener('visibilitychange', onVisibility);
 
       // pause on hover/focus
       root.addEventListener('mouseenter', stopAuto);
