@@ -68,7 +68,7 @@ header{
   display:flex; align-items:center; gap:12px; letter-spacing:0.4px;
 }
 .logo{
-  width:38px;
+  width:58px;
 }
 /* removed @keyframes slowSpin */
 .brand h1{
