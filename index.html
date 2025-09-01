@@ -77,46 +77,21 @@
       }
     })();
   </script>
-  <script>
-    // Performance: pause autoplaying videos when off-screen
-    (function(){
-      function handle(entries){
-        entries.forEach((entry) => {
-          const vid = entry.target;
-          if(!(vid instanceof HTMLVideoElement)) return;
-          if(entry.isIntersecting){
-            if(vid.dataset.wasPaused !== 'true' && vid.paused){
-              try{ vid.play(); }catch{}
-            }
-          }else{
-            vid.dataset.wasPaused = String(vid.paused);
-            try{ vid.pause(); }catch{}
-          }
-        });
-      }
-      const obs = new IntersectionObserver(handle, { rootMargin: '0px 0px -20% 0px', threshold: 0.1 });
-      function init(){
-        document.querySelectorAll('video[autoplay]').forEach(v => obs.observe(v));
-        document.addEventListener('visibilitychange', () => {
-          const hidden = document.hidden;
-          document.querySelectorAll('video').forEach(v => { try{ hidden ? v.pause() : (v.dataset.wasPaused !== 'true' && v.play()); }catch{} });
-        });
-      }
-      if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', init); } else { init(); }
-    })();
-  </script>
+  
 <body class="animated-bg">
   <header>
     <div class="brand">
       <img src="nineonenine.png" class="logo" aria-hidden="true" />
     </div>
     <nav class="nav" aria-label="Primary">
-            <a class="gold-cta" href="https://store.nineonenine.design/checkout/packages/add/7003602/single" role="button" aria-label="Purchase now">
+            <a class="gold-cta" href="https://store.nineonenine.design/checkout/packages/add/7003602/single" role="button" aria-label="Purchase now — $59.99 USD">
               <span class="gold-cta__glow" aria-hidden="true"></span>
+              <span class="gold-cta__sticker" aria-hidden="true">$59.99 USD</span>
               <span class="gold-cta__inner">
                 <span class="gold-cta__label">PURCHASE NOW</span>
               </span>
             </a>
+      <a class="btn primary" href="https://sinatra.gitbook.io/919design/paid-resources/quickstart" target="_blank" rel="noopener noreferrer" aria-label="Read Documentation">Documentation</a>
       <a class="btn primary" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer">Join our Discord</a>
     </nav>
   </header>
@@ -128,7 +103,7 @@
           <span class="pill is-available">NOW AVAILABLE</span>
         </div>
         <h2 class="title">
-          Manage <span class="fivem-text">FiveM</span> like a
+          Find your <span class="fivem-text">COLORS</span> with
           <span class="gradient-text">PRO</span>.
         </h2>
         <p class="subtitle">
@@ -200,8 +175,9 @@
           </div>
         </div>
         <div class="cta-row">
-          <a class="gold-cta" href="https://store.nineonenine.design/checkout/packages/add/7003602/single" role="button" aria-label="Purchase now">
+          <a class="gold-cta" href="https://store.nineonenine.design/checkout/packages/add/7003602/single" role="button" aria-label="Purchase now — $59.99 USD">
             <span class="gold-cta__glow" aria-hidden="true"></span>
+            <span class="gold-cta__sticker" aria-hidden="true">$59.99 USD</span>
             <span class="gold-cta__inner">
               <span class="gold-cta__label">PURCHASE NOW</span>
             </span>
@@ -227,27 +203,22 @@
         <div class="color-cycle" aria-hidden="true"></div>
         <div class="glow-ring" aria-hidden="true"></div>
  
-        <!-- Screenshot cards -->
-        <div class="cards" id="cards">
-          <div class="card card-a" data-depth="80" aria-label="Screenshot A" data-w="0" data-h="0">
-            <img src="ss1.png" alt="919ADMIN PRO screenshot 1" />
-          </div>
- 
-          <div class="card card-b" data-depth="40" aria-label="Screenshot B" style="--c1: 0,229,255; --c2: 255,61,127;" data-w="0" data-h="0">
-            <img src="ss2.png" alt="919ADMIN PRO screenshot 2" />
-          </div>
- 
-          <div class="card card-c" data-depth="20" aria-label="Screenshot C" style="--c1: 124,77,255; --c2: 0,229,255;" data-w="0" data-h="0">
-            <img src="ss3.png" alt="919ADMIN PRO screenshot 3" />
-          </div>
+        <!-- Screenshot rotator (1x1, fades between images) -->
+        <div class="screenshot-rotator" aria-label="Screenshots rotator">
+          <img src="ss1.png" alt="919ADMIN PRO screenshot 1" />
+          <img src="ss2.png" alt="919ADMIN PRO screenshot 2" />
+          <img src="ss3.png" alt="919ADMIN PRO screenshot 3" />
+          <img src="ss4.png" alt="919ADMIN PRO screenshot 4" />
+          <img src="ss5.png" alt="919ADMIN PRO screenshot 5" />
+          <img src="ss6.png" alt="919ADMIN PRO screenshot 6" />
         </div>
       </div>
     </section>
 
-    <!-- Product demo hero -->
+    <!-- Product demo hero (static image) -->
     <section class="hero" aria-label="Live demo">
-      <div class="video-frame" aria-label="919ADMIN PRO video demo">
-        <video src="919AdminPlayerDemo.mp4" autoplay muted playsinline loop controls poster="ss1.png" loading="lazy"></video>
+      <div class="video-frame" aria-label="919ADMIN PRO demo image">
+        <img src="hero2.png" alt="919ADMIN PRO demo" loading="lazy" />
       </div>
       <div class="copy">
         <div class="coming-soon" role="status" aria-label="Live demo">
@@ -269,7 +240,7 @@
       </div>
     </section>
 
-    <!-- Items tools hero -->
+    <!-- Items tools hero (static image) -->
     <section class="hero" aria-label="Items tools preview">
       <div class="copy">
         <div class="coming-soon" role="status" aria-label="Feature preview">
@@ -289,15 +260,15 @@
           <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Clean, keyboard‑friendly navigation</div>
         </div>
       </div>
-      <div class="video-frame" aria-label="919ADMIN PRO items demo">
-        <video src="919AdminItemsDemo.mp4" autoplay muted playsinline loop controls poster="ss2.png" loading="lazy"></video>
+      <div class="video-frame" aria-label="919ADMIN PRO items image">
+        <img src="hero3.png" alt="919ADMIN PRO items" loading="lazy" />
       </div>
     </section>
 
-    <!-- Permissions hero -->
+    <!-- Permissions hero (static image) -->
     <section class="hero" aria-label="Permissions preview">
-      <div class="video-frame" aria-label="919ADMIN PRO permissions demo">
-        <video src="919AdminPermsDemo.mp4" autoplay muted playsinline loop controls poster="ss3.png" loading="lazy"></video>
+      <div class="video-frame" aria-label="919ADMIN PRO permissions image">
+        <img src="hero4.png" alt="919ADMIN PRO permissions" loading="lazy" />
       </div>
       <div class="copy">
         <div class="coming-soon" role="status" aria-label="Feature preview">
@@ -355,6 +326,8 @@
       <button class="modal__close" type="button" aria-label="Close" data-close="true">×</button>
       <img class="modal__image" alt="Full-size screenshot preview" />
     </div>
+    <button class="modal__nav modal__prev" type="button" aria-label="Previous image">‹</button>
+    <button class="modal__nav modal__next" type="button" aria-label="Next image">›</button>
   </div>
 
   <script>
@@ -639,6 +612,98 @@
       // initialize
       setActiveDot(0);
       track.style.transform = 'translateX(0%)';
+    })();
+  </script>
+  <script>
+    // First hero screenshot rotator (fade)
+    (function(){
+      const root = document.querySelector('.screenshot-rotator');
+      if(!root) return;
+      const images = Array.from(root.querySelectorAll('img'));
+      if(images.length === 0) return;
+
+      let idx = 0;
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function setActive(i){ images.forEach((img, n) => img.classList.toggle('is-active', n === i)); }
+      setActive(0);
+
+      if(prefersReduced || images.length === 1) return;
+
+      let timer = null;
+      function next(){ idx = (idx + 1) % images.length; setActive(idx); }
+      function start(){ stop(); timer = setInterval(next, 4000); }
+      function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+      start();
+
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      root.addEventListener('focusin', stop);
+      root.addEventListener('focusout', start);
+      document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+    })();
+  </script>
+  <script>
+    // Click-to-zoom for screenshot grid with prev/next navigation (wraps around)
+    (function(){
+      const $modal = $('#screenshot-modal');
+      if($modal.length === 0) return;
+      const $modalImg = $modal.find('.modal__image');
+      const $closeEls = $modal.find('[data-close]');
+      const $body = $('body');
+      const prevBtn = document.querySelector('.modal__prev');
+      const nextBtn = document.querySelector('.modal__next');
+
+      const nodes = Array.from(document.querySelectorAll('.screenshot-rotator img, .video-frame img, .screenshot-grid img, #cards .card img'));
+      const gallery = nodes.map((img) => ({ node: img, src: img.currentSrc || img.src, alt: img.alt || 'Full-size screenshot preview' }));
+      let currentIndex = -1;
+
+      function render(i){
+        const count = gallery.length;
+        if(count === 0) return;
+        currentIndex = ((i % count) + count) % count; // safe modulo
+        const item = gallery[currentIndex];
+        $modalImg.attr({ src: item.src, alt: item.alt });
+      }
+
+      function openAt(i){
+        render(i);
+        $modal.attr('aria-hidden', 'false').addClass('is-open');
+        $body.css('overflow', 'hidden');
+      }
+      function close(){
+        $modal.removeClass('is-open').attr('aria-hidden', 'true');
+        $modalImg.removeAttr('src');
+        $body.css('overflow', '');
+      }
+      function next(){ render(currentIndex + 1); }
+      function prev(){ render(currentIndex - 1); }
+
+      // Bind close controls and interactions
+      $closeEls.on('click', close);
+      $(window).on('keydown', function(e){
+        if(!$modal.hasClass('is-open')) return;
+        if(e.key === 'Escape') close();
+        else if(e.key === 'ArrowRight') next();
+        else if(e.key === 'ArrowLeft') prev();
+      });
+      const $content = $modal.find('.modal__content');
+      $content.on('click', function(e){ e.stopPropagation(); });
+      $modal.on('click', function(e){ if(e.target === $modal[0]) close(); });
+
+      // Button navigation
+      if(prevBtn) prevBtn.addEventListener('click', function(e){ e.stopPropagation(); prev(); });
+      if(nextBtn) nextBtn.addEventListener('click', function(e){ e.stopPropagation(); next(); });
+
+      // Attach to both the new grid and legacy deck images if present
+      nodes.forEach(function(img){
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', function(e){
+          e.stopPropagation();
+          const index = nodes.indexOf(img);
+          openAt(index >= 0 ? index : 0);
+        });
+      });
     })();
   </script>
 </body>
