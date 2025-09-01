@@ -121,11 +121,7 @@ main{
   margin: 0 auto;
 }
 
-/* Progressive rendering to reduce scroll jank */
-.hero, .showcase, .video-frame, .info, .frameworks{
-  content-visibility: auto;
-  contain-intrinsic-size: 900px; /* estimate to avoid layout shifts */
-}
+/* Removed content-visibility and contain-intrinsic-size to disable lazy rendering */
 
 /* Additional vertical rhythm between hero sections */
 .hero + .hero{
