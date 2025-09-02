@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>919ADMIN PRO — 1920x1080 Hero Frames</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Force pure white page background (outside the hero frames) */
+    html, body, main{ background: #000 !important; }
+    /* Frame for easy selection/screenshot */
+    .frame-1080{
+      width: 960px;
+      height: 540px;
+      margin: 24px auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: radial-gradient(1200px 800px at 20% -10%, #121a2f 0%, transparent 60%),
+                  radial-gradient(1100px 700px at 120% 20%, #1b1030 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
+      overflow: hidden;
+      position: relative; /* anchor scaled hero absolutely */
+    }
+    /* Make the hero fill the frame with same look */
+    .frame-1080 > .hero{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      max-width: none;
+      margin: 0;
+      min-height: 0;
+      padding: 54px 48px;
+      grid-template-columns: 1.1fr 1.2fr;
+      align-items: center;
+      transform-origin: top left;
+      transform: scale(0.5);
+    }
+    /* Remove site header spacing for this export page */
+    main{ padding-top: 0; }
+    header, footer{ display: none !important; }
+    
+    /* Text sizing overrides for 960x540 export (values are pre-scale; net ~2x smaller) */
+    .frame-1080 .hero .title{ font-size: 100px !important; }
+    .frame-1080 .hero .subtitle{ font-size: 34px !important; }
+    .frame-1080 .hero .feature{ font-size: 28px !important; }
+
+    /* Enlarge "Feature Preview" pill (pre-scale so it reads ~2-3x larger) */
+    .frame-1080 .coming-soon{ margin-bottom: 18px; }
+    .frame-1080 .coming-soon .pill{
+      font-size: 30px !important;
+      padding: 10px 18px !important;
+      gap: 10px !important;
+      border-radius: 999px !important;
+      letter-spacing: 0.6px !important;
+    }
+    .frame-1080 .coming-soon .pill::before{
+      width: 18px; height: 18px;
+    }
+
+    /* Make the second hero's screenshot slightly smaller inside its column */
+    .frame-1080 section[aria-label="Items tools preview"] .video-frame{
+      transform: scale(0.9);
+      transform-origin: center right;
+    }
+
+    /* Static CTA frame for image export (same width and styling as heroes) */
+    .frame-cta{
+      width: 960px;
+      margin: 24px auto 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: radial-gradient(1200px 800px at 20% -10%, #121a2f 0%, transparent 60%),
+                  radial-gradient(1100px 700px at 120% 20%, #1b1030 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
+      padding: 16px 24px;
+      color: var(--text);
+      display: grid;
+      place-items: center;
+    }
+    .buy-cta{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      line-height: 1.2;
+    }
+    .buy-cta .label{ font-weight: 900; font-size: 42px; }
+    .buy-cta .price{
+      font-weight: 900;
+      font-size: 38px;
+      color: #fff6cf;
+      text-shadow: 0 0 18px rgba(255,200,60,0.25);
+    }
+
+    /* YouTube (disabled) CTA styles */
+    .yt-cta{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: #9fb3c8; /* greyed */
+    }
+    .yt-cta .text{ font-weight: 900; font-size: 38px; letter-spacing: 0.2px; }
+    .yt-cta .yt-icon{ width: 48px; height: 34px; opacity: 0.7; }
+
+    /* Disabled look */
+    .frame-cta.is-disabled{
+      cursor: default;
+      border-color: rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.38), rgba(0,0,0,0.38)),
+        radial-gradient(1200px 800px at 20% -10%, #121a2f 0%, transparent 60%),
+        radial-gradient(1100px 700px at 120% 20%, #1b1030 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
+    }
+    .frame-cta.is-disabled .yt-cta{ color: #8aa0bb; }
+    .frame-cta.is-disabled .yt-cta .yt-icon{ opacity: 0.55; }
+
+    /* Documentation CTA styles */
+    .doc-cta{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text);
+    }
+    .doc-cta .text{ font-weight: 900; font-size: 38px; letter-spacing: 0.2px; }
+    .doc-cta .icon{ width: 42px; height: 42px; color: #19c3ff; }
+  </style>
+  <!-- No JS needed; static export for clean screenshots -->
+  <meta name="robots" content="noindex" />
+  <meta name="description" content="Export page rendering 919ADMIN PRO hero sections at 1920x1080 for image capture." />
+  <link rel="icon" href="data:," />
+  <base href="." />
+</head>
+<body>
+  <main>
+    <!-- Static buy CTA (960px wide, matches hero background) -->
+    <div class="frame-cta" aria-label="Buy now CTA">
+      <div class="buy-cta">
+        <span class="label">Buy now!</span>
+        <span class="price">$59.99 USD</span>
+      </div>
+    </div>
+    
+    <!-- Static video-coming-soon CTA (960px wide, matches hero background) -->
+    <div class="frame-cta is-disabled" aria-label="Video coming soon CTA">
+      <div class="yt-cta">
+        <svg class="yt-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.5 6.2c-.3-1.2-1.2-2.1-2.4-2.4C19 3.3 12 3.3 12 3.3s-7 0-9.1.5C1.7 4.1.8 5 .5 6.2.1 8 .1 12 .1 12s0 4 .4 5.8c.3 1.2 1.2 2.1 2.4 2.4C5 20.7 12 20.7 12 20.7s7 0 9.1-.5c1.2-.3 2.1-1.2 2.4-2.4.4-1.8.4-5.8.4-5.8s0-4-.4-5.8zM9.7 15.3V8.7L15.8 12l-6.1 3.3z"/>
+        </svg>
+        <span class="text">Video coming soon</span>
+      </div>
+    </div>
+
+    <!-- Static documentation CTA (active) -->
+    <div class="frame-cta" aria-label="Documentation CTA">
+      <div class="doc-cta">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z"/>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z"/>
+        </svg>
+        <span class="text">Documentation</span>
+      </div>
+    </div>
+    
+    <!-- Live demo hero @ 1920x1080 -->
+    <div class="frame-1080" aria-label="Live demo hero frame">
+      <section class="hero" aria-label="Live demo">
+        <div class="video-frame" aria-label="919ADMIN PRO demo image">
+          <img src="hero2.png" alt="919ADMIN PRO demo" />
+        </div>
+        <div class="copy">
+          <div class="coming-soon" role="status" aria-label="Live demo">
+            <span class="pill">Feature Preview</span>
+          </div>
+          <h2 class="title">
+            Help <span class="fivem-text">Players</span> like a 
+            <span class="gradient-text">PRO</span>.
+          </h2>
+          <p class="subtitle">
+            <strong>919ADMIN PRO</strong> puts player management at your fingertips: find players instantly, change jobs and grades and more in one click, and run a curated, role‑aware catalog of actions—safely and fast.
+          </p>
+          <div class="feature-bullets" role="list" aria-label="Player management highlights">
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Instant search and filter across online players</div>
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Update player data quickly and easily</div>
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Action catalog with favorites, recents, and quick keys</div>
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Role‑aware visibility, confirmations, reasons, and audit logs</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Items tools hero @ 1920x1080 -->
+    <div class="frame-1080" aria-label="Items tools hero frame">
+      <section class="hero" aria-label="Items tools preview">
+        <div class="copy">
+          <div class="coming-soon" role="status" aria-label="Feature preview">
+            <span class="pill">Feature Preview</span>
+          </div>
+          <h2 class="title">
+            Spawn <span class="fivem-text">Items</span> like a
+            <span class="gradient-text">PRO</span>.
+          </h2>
+          <p class="subtitle">
+            <strong>919ADMIN PRO</strong> gives admins instant item access: full item search, click to spawn to self, and <strong>Shift‑click</strong> to give to any player — all optimized with dynamic scrolling loading for high‑performance lists.
+          </p>
+          <div class="feature-bullets" role="list" aria-label="Items tools highlights">
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Full item search for fast discovery</div>
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Click to spawn to self; <strong>Shift‑click</strong> to give to player</div>
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Dynamic scrolling loading for ultra‑large lists</div>
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Clean UI for easy use</div>
+          </div>
+        </div>
+        <div class="video-frame" aria-label="919ADMIN PRO items image">
+          <img src="hero3.png" alt="919ADMIN PRO items" />
+        </div>
+      </section>
+    </div>
+
+    <!-- Permissions hero @ 1920x1080 -->
+    <div class="frame-1080" aria-label="Permissions hero frame">
+      <section class="hero" aria-label="Permissions preview">
+        <div class="video-frame" aria-label="919ADMIN PRO permissions image">
+          <img src="hero4.png" alt="919ADMIN PRO permissions" />
+        </div>
+        <div class="copy">
+          <div class="coming-soon" role="status" aria-label="Feature preview">
+            <span class="pill">Feature Preview</span>
+          </div>
+          <h2 class="title">
+            Control <span class="fivem-text">Permissions</span> like a
+            <span class="gradient-text">PRO</span>.
+          </h2>
+          <p class="subtitle">
+            A graphical, <strong>fully granular</strong> permissions system. Create custom <strong>permission groups</strong>, grant exactly what each role can do, and assign them in seconds. A default <strong>SuperAdmin</strong> group with full access is included, and <strong>Discord permissions</strong> are supported.
+          </p>
+          <div class="feature-bullets" role="list" aria-label="Permissions highlights">
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Granular toggles for every capability</div>
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Create and assign custom permission groups</div>
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Default SuperAdmin group with full access</div>
+            <div class="feature" role="listitem"><span class="dot" aria-hidden="true"></span> Discord roles/IDs support for access control</div>
+          </div>
+        </div>
+      </section>
+    </div><br/>
+  </main>
+</body>
+</html>
+

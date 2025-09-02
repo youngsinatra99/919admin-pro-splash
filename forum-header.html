@@ -16,7 +16,7 @@
                 margin: 0;
                 display: grid;
                 place-items: center;
-                background: #090d16;
+                background: #000;
                 font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
             }
 
@@ -31,6 +31,8 @@
                     radial-gradient(1200px 800px at 20% -10%, #121a2f 0%, transparent 60%),
                     radial-gradient(1100px 700px at 120% 20%, #1b1030 0%, transparent 60%),
                     linear-gradient(180deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
+                border: 1px solid var(--border);
+                border-radius: 12px;
                 box-shadow: var(--frameShadow);
             }
 
@@ -40,6 +42,7 @@
                 content: "";
                 position: absolute;
                 inset: -6%;
+                border-radius: 12px;
                 pointer-events: none;
                 background:
                     radial-gradient(600px 360px at 20% 10%, rgba(124,77,255,0.14), transparent 60%),
