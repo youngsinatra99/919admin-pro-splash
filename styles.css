@@ -1206,6 +1206,33 @@ body.advent-page{
   border-radius: 999px;
 }
 
+/* Past/expired state (distinct from locked/future) */
+.advent-page .advent-door.is-past{
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+.advent-page .advent-door.is-past .advent-door__inner{
+  filter: grayscale(0.45) saturate(0.55);
+}
+.advent-page .advent-door.is-past .advent-door__front::after{
+  content: "EXPIRED";
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 1000;
+  letter-spacing: 0.9px;
+  color: #ffe9d6;
+  background:
+    radial-gradient(140% 220% at 0% 0%, rgba(255,61,127,0.22), transparent 60%),
+    linear-gradient(180deg, rgba(255,120,60,0.22), rgba(0,0,0,0.25));
+  border: 1px solid rgba(255,120,60,0.35);
+  padding: 6px 10px;
+  border-radius: 999px;
+  box-shadow: 0 10px 26px rgba(255,120,60,0.12);
+}
+
 .advent-page .advent-footnote{
   margin-top: 10px;
   color: rgba(159,179,200,0.92);

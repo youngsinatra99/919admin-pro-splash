@@ -3,8 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../Favicon-Asset.png" />
   <title>919DESIGN — Christmas Advent Calendar</title>
   <meta name="description" content="919DESIGN — Christmas Advent Calendar (Dec 19–25). Unlock daily deals and reveal coupon codes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="919DESIGN" />
+  <meta property="og:title" content="919DESIGN — Christmas Advent Calendar" />
+  <meta property="og:description" content="Advent Calendar (Dec 19–25). Daily deals with 24-hour codes (9 PM EST to 9 PM EST)." />
+  <meta property="og:image" content="https://919admin.pro/Favicon-Asset.png" />
+  <meta property="og:image:alt" content="919DESIGN Advent Calendar" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="919DESIGN — Christmas Advent Calendar" />
+  <meta name="twitter:description" content="Advent Calendar (Dec 19–25). Daily deals with 24-hour codes (9 PM EST to 9 PM EST)." />
+  <meta name="twitter:image" content="https://919admin.pro/Favicon-Asset.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
@@ -334,17 +345,21 @@
         if(!allowedDay){
           setStatus('Advent deals unlock Dec 19–25. Come back on Dec 19.', 'warning');
         }else{
-          setStatus(`Unlocked through Dec ${allowedDay}.`, 'ok');
+          setStatus(`Today's deal: Dec ${allowedDay} (valid 24 hours).`, 'ok');
         }
 
         doors.forEach((door) => {
           const day = Number(door.getAttribute('data-day'));
-          const isAvailable = allowedDay && day <= allowedDay;
-          const isLocked = !isAvailable;
+          const isAvailable = allowedDay && day === allowedDay;
+          const isPast = allowedDay && day < allowedDay;
+          const isFuture = !allowedDay || day > allowedDay;
+          const isLocked = isFuture; // "locked" is reserved for future days; past days are "expired"
           const isOpen = isAvailable && door.classList.contains('is-open');
 
           door.classList.toggle('is-locked', isLocked);
           door.classList.toggle('is-available', isAvailable);
+          door.classList.toggle('is-past', isPast);
+          door.classList.toggle('is-future', isFuture);
           door.classList.toggle('is-open', isOpen);
 
           // Never show an "open" door if the day isn't currently available.
@@ -354,7 +369,7 @@
 
           const hit = door.querySelector('.advent-door__hit');
           const flip = door.querySelector('.advent-flip');
-          if(isLocked){
+          if(!isAvailable){
             door.setAttribute('aria-disabled', 'true');
             if(hit) hit.setAttribute('disabled', 'disabled');
             if(flip) flip.setAttribute('disabled', 'disabled');
@@ -369,7 +384,7 @@
       function openDoor(door){
         const day = Number(door.getAttribute('data-day'));
         const allowedDay = getAllowedDay();
-        if(!allowedDay || day > allowedDay) return;
+        if(!allowedDay || day !== allowedDay) return;
         if(door.classList.contains('is-open')) return;
 
         // Add a short "tap" animation, then flip.
@@ -393,7 +408,7 @@
       function flipDoor(door){
         const day = Number(door.getAttribute('data-day'));
         const allowedDay = getAllowedDay();
-        const isAvailable = allowedDay && day <= allowedDay;
+        const isAvailable = allowedDay && day === allowedDay;
         if(!isAvailable) return;
 
         // Hide the flip button immediately when starting any flip.
