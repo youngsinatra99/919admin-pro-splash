@@ -90,6 +90,8 @@
   </script>
   
 <body class="animated-bg">
+  <div class="xmas-lights" aria-hidden="true"></div>
+  <div class="xmas-snow" aria-hidden="true"></div>
   <header>
     <div class="brand">
       <img src="nineonenine.png" class="logo" aria-hidden="true" />
@@ -715,6 +717,52 @@
           openAt(index >= 0 ? index : 0);
         });
       });
+    })();
+  </script>
+
+  <script>
+    // Christmas FX: snow + lights (disabled if prefers-reduced-motion)
+    (function(){
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(reduce) return;
+
+      // Lights
+      const lights = document.querySelector('.xmas-lights');
+      if(lights && !lights.dataset.built){
+        lights.dataset.built = '1';
+        const colors = ['#ff3d7f', '#00e5ff', '#7c4dff', '#ffdd55', '#22c55e'];
+        const count = 28;
+        for(let i=0;i<count;i++){
+          const b = document.createElement('span');
+          b.className = 'xmas-lights__bulb';
+          b.style.left = `${(i/(count-1))*100}%`;
+          b.style.setProperty('--bulb', colors[i % colors.length]);
+          b.style.animationDelay = `${(i % 7) * 120}ms`;
+          lights.appendChild(b);
+        }
+      }
+
+      // Snow
+      const snow = document.querySelector('.xmas-snow');
+      if(snow && !snow.dataset.built){
+        snow.dataset.built = '1';
+        const flakes = 55;
+        for(let i=0;i<flakes;i++){
+          const f = document.createElement('span');
+          f.className = 'xmas-snow__flake';
+          const x = Math.random() * 100;
+          const size = 2 + Math.random() * 4.5;
+          const dur = 8 + Math.random() * 10;
+          const delay = -Math.random() * dur;
+          const drift = (Math.random() * 60) - 30;
+          f.style.left = `${x}%`;
+          f.style.setProperty('--s', `${size}px`);
+          f.style.setProperty('--d', `${dur}s`);
+          f.style.setProperty('--delay', `${delay}s`);
+          f.style.setProperty('--drift', `${drift}px`);
+          snow.appendChild(f);
+        }
+      }
     })();
   </script>
 </body>
