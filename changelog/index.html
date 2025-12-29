@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../Favicon-Asset.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="919DESIGN" />
+  <meta property="og:title" content="919ADMIN PRO — Changelog" />
+  <meta property="og:description" content="919ADMIN PRO — Product changelog." />
+  <meta property="og:image" content="https://919admin.pro/Favicon-Asset.png" />
+  <meta property="og:image:alt" content="919DESIGN" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="919ADMIN PRO — Changelog" />
+  <meta name="twitter:description" content="919ADMIN PRO — Product changelog." />
+  <meta name="twitter:image" content="https://919admin.pro/Favicon-Asset.png" />
+  <title>919ADMIN PRO — Changelog</title>
+  <meta name="description" content="919ADMIN PRO — Product changelog." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    html{
+      background: #0a0714;
+    }
+    body{
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: #e6f1ff;
+      background-color: #0a0714;
+      background-image: 
+        radial-gradient(ellipse 1200px 800px at 20% 200px, rgba(18,26,47,1), transparent),
+        radial-gradient(ellipse 1100px 700px at 120% 300px, rgba(27,16,48,1), transparent);
+      overflow-x: hidden;
+    }
+    [hidden]{ display: none !important; }
+    .changelog-hero{
+      min-height: auto;
+      grid-template-columns: 1fr;
+      padding-top: 24px;
+      padding-bottom: 16px;
+    }
+    .changelog-hero .title{
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .changelog-hero .subtitle{
+      margin-bottom: 0;
+    }
+    .changelog-hero .coming-soon{
+      margin-bottom: 8px;
+    }
+    .changelog{
+      grid-template-columns: 1fr;
+      margin-top: 18px;
+      margin-bottom: 36px;
+    }
+    .changelog .tile{
+      padding: 18px;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .changelog .tile::before{
+      content: "";
+      position: absolute;
+      inset: -2px -2px auto -2px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(0,229,255,0.0), rgba(0,229,255,0.55), rgba(124,77,255,0.55), rgba(255,61,127,0.45), rgba(255,61,127,0.0));
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    .changelog .tile.is-current{
+      border: 1px solid rgba(0,229,255,0.35);
+      box-shadow: 
+        0 0 0 1px rgba(0,229,255,0.15) inset,
+        0 12px 32px rgba(0,229,255,0.12);
+    }
+    .changelog .tile.is-current::before{
+      background: linear-gradient(90deg, rgba(0,229,255,0.0), rgba(0,229,255,0.75), rgba(0,229,255,0.75), rgba(0,229,255,0.0));
+      opacity: 1;
+      height: 3px;
+    }
+    .current-badge{
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      margin-left: 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(0,229,255,0.35), rgba(0,180,220,0.35));
+      border: 1px solid rgba(0,229,255,0.45);
+      box-shadow: 
+        0 0 16px rgba(0,229,255,0.25),
+        inset 0 0 0 1px rgba(255,255,255,0.15);
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .changelog .tile h3{
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin: 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .changelog .version{
+      font-weight: 900;
+      letter-spacing: 0.2px;
+    }
+    .changelog time{
+      font-size: 12px;
+      font-weight: 800;
+      color: rgba(159,179,200,0.92);
+      letter-spacing: 0.3px;
+    }
+    .changelog ul{
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+      color: rgba(159,179,200,0.96);
+      line-height: 1.7;
+    }
+    .changelog li{
+      margin: 7px 0;
+      position: relative;
+      padding-left: 18px;
+    }
+    .changelog li::before{
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      transform: translateY(-50%);
+      background: radial-gradient(circle at 30% 30%, #fff, rgba(155,212,255,0.9) 35%, rgba(0,102,255,0.9) 70%);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.10);
+      opacity: 0.9;
+    }
+    .changelog ul ul{
+      margin: 6px 0 0;
+      padding-left: 18px;
+    }
+    .changelog ul ul li{
+      margin: 4px 0;
+    }
+    .changelog ul ul li::before{
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle at 30% 30%, rgba(159,179,200,0.9), rgba(100,120,140,0.8));
+      opacity: 0.75;
+    }
+    .changelog code{
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.92em;
+      color: rgba(230,241,255,0.96);
+      background: rgba(255,255,255,0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .changelog em{
+      color: rgba(159,179,200,0.90);
+      font-style: italic;
+    }
+    .changelog a{
+      color: rgba(0,229,255,0.95);
+      text-decoration: underline;
+      text-decoration-color: rgba(0,229,255,0.35);
+      text-underline-offset: 2px;
+    }
+    .changelog a:hover{
+      text-decoration-color: rgba(0,229,255,0.70);
+    }
+    .changelog .tag{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background:
+        radial-gradient(120% 200% at 0% 0%, rgba(124,77,255,0.22), transparent 48%),
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+      color: rgba(207,224,255,0.92);
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      width: fit-content;
+    }
+    .changelog .sections{
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .changelog .section-title{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background:
+        radial-gradient(120% 220% at 10% 0%, rgba(124,77,255,0.22), transparent 55%),
+        radial-gradient(120% 220% at 90% 100%, rgba(0,229,255,0.14), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      color: rgba(207,224,255,0.96);
+    }
+    .changelog .section-title + ul{ margin-top: 6px; }
+    .changelog .sections > div{
+      padding: 12px 12px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.02);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+    .changelog .callouts{
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .changelog .callout{
+      border-radius: 14px;
+      padding: 12px 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+      color: rgba(207,224,255,0.90);
+      line-height: 1.55;
+    }
+    .changelog .callout strong{ color: rgba(255,255,255,0.96); }
+    .changelog .callout.is-warn{
+      border-color: rgba(255,200,60,0.22);
+      background:
+        radial-gradient(140% 200% at 0% 0%, rgba(255,178,0,0.18), transparent 45%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      color: rgba(255,246,207,0.92);
+    }
+    .changelog .callout.is-danger{
+      border-color: rgba(255,120,60,0.25);
+      background:
+        radial-gradient(140% 200% at 0% 0%, rgba(255,61,127,0.16), transparent 50%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      color: rgba(255,233,214,0.92);
+    }
+    .changelog .meta-links{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .changelog .inline-link{
+      color: rgba(230,241,255,0.96);
+      text-decoration: underline;
+      text-decoration-color: rgba(0,229,255,0.35);
+      text-underline-offset: 3px;
+    }
+    .changelog .inline-link:hover{
+      text-decoration-color: rgba(0,229,255,0.70);
+    }
+
+    .version-nav{
+      margin-top: 14px;
+      padding: 12px 14px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+    .version-nav__track{
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 0 10px;
+    }
+    .version-nav__track::before{
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      top: 20%;
+      height: 3px;
+      transform: translateY(-50%);
+      background: linear-gradient(90deg,
+        rgba(0,229,255,0.55),
+        rgba(124,77,255,0.55) 50%,
+        rgba(255,61,127,0.45));
+      border-radius: 999px;
+      z-index: 0;
+    }
+    .version-nav__item{
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex: 1 1 0;
+      max-width: 100px;
+      appearance: none;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+    }
+    .version-nav__dot{
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.25);
+      background: rgba(14,18,28,0.9);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .version-nav__item:hover .version-nav__dot{
+      transform: scale(1.15);
+      border-color: rgba(255,255,255,0.45);
+    }
+    .version-nav__item[aria-selected="true"] .version-nav__dot{
+      background: radial-gradient(circle at 30% 30%, #fff, rgba(155,212,255,0.95) 40%, rgba(0,102,255,0.95) 75%);
+      border-color: rgba(0,229,255,0.55);
+      box-shadow: 0 0 0 4px rgba(0,229,255,0.18), 0 4px 20px rgba(0,229,255,0.25);
+      transform: scale(1.2);
+    }
+    .version-nav__label{
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      color: rgba(159,179,200,0.85);
+      white-space: nowrap;
+      transition: color .18s ease;
+    }
+    .version-nav__item:hover .version-nav__label{
+      color: rgba(207,224,255,0.95);
+    }
+    .version-nav__item[aria-selected="true"] .version-nav__label{
+      color: rgba(230,241,255,0.98);
+    }
+    .version-nav__item.is-current .version-nav__dot{
+      border-color: rgba(0,229,255,0.65);
+      box-shadow: 
+        0 0 0 3px rgba(0,229,255,0.22),
+        0 0 20px rgba(0,229,255,0.30);
+    }
+    .version-nav__item.is-current[aria-selected="true"] .version-nav__dot{
+      border-color: rgba(0,229,255,0.75);
+      box-shadow: 
+        0 0 0 5px rgba(0,229,255,0.25),
+        0 6px 24px rgba(0,229,255,0.35);
+    }
+    .version-nav__current{
+      font-size: 8px;
+      color: rgba(0,229,255,0.90);
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+    @media (max-width: 640px){
+      .version-nav__track{ gap: 4px; }
+      .version-nav__item{ max-width: 60px; }
+      .version-nav__label{ font-size: 9px; }
+    }
+  </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-510FRZ1EMS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-510FRZ1EMS');
+</script>
+<body>
+  <header>
+    <div class="brand">
+      <img src="../nineonenine.png" class="logo" aria-hidden="true" />
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a class="btn primary" href="../index.html" aria-label="Back to home">Home</a>
+      <a class="gold-cta" href="https://store.nineonenine.design/checkout/packages/add/7003602/single" role="button" aria-label="Purchase now — $59.99 USD">
+        <span class="gold-cta__glow" aria-hidden="true"></span>
+        <span class="gold-cta__sticker" aria-hidden="true">$59.99 USD</span>
+        <span class="gold-cta__inner">
+          <span class="gold-cta__label">PURCHASE NOW</span>
+        </span>
+      </a>
+      <a class="btn primary" href="https://sinatra.gitbook.io/919design/paid-resources/quickstart" target="_blank" rel="noopener noreferrer" aria-label="Read Documentation">Documentation</a>
+      <a class="btn primary" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">Join our Discord</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero changelog-hero" aria-label="Changelog hero">
+      <div class="copy">
+        <h2 class="title">
+          919ADMIN <span class="gradient-text">PRO</span> Updates
+        </h2>
+
+        <nav class="version-nav" aria-label="Version selector">
+          <div class="version-nav__track" role="tablist">
+            <button class="version-nav__item is-current" role="tab" aria-selected="true" aria-controls="release-v110" data-target="release-v110" type="button">
+              <span class="version-nav__dot"></span>
+              <span class="version-nav__label">1.1.0 <span class="version-nav__current">(Current)</span></span>
+            </button>
+            <button class="version-nav__item" role="tab" aria-selected="false" aria-controls="release-v104" data-target="release-v104" type="button">
+              <span class="version-nav__dot"></span>
+              <span class="version-nav__label">1.0.4</span>
+            </button>
+            <button class="version-nav__item" role="tab" aria-selected="false" aria-controls="release-v103" data-target="release-v103" type="button">
+              <span class="version-nav__dot"></span>
+              <span class="version-nav__label">1.0.3</span>
+            </button>
+            <button class="version-nav__item" role="tab" aria-selected="false" aria-controls="release-v102" data-target="release-v102" type="button">
+              <span class="version-nav__dot"></span>
+              <span class="version-nav__label">1.0.2</span>
+            </button>
+            <button class="version-nav__item" role="tab" aria-selected="false" aria-controls="release-v101" data-target="release-v101" type="button">
+              <span class="version-nav__dot"></span>
+              <span class="version-nav__label">1.0.1</span>
+            </button>
+            <button class="version-nav__item" role="tab" aria-selected="false" aria-controls="release-v100" data-target="release-v100" type="button">
+              <span class="version-nav__dot"></span>
+              <span class="version-nav__label">1.0.0</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </section>
+
+    <section class="info changelog" aria-label="Changelog entries">
+      <article id="release-v110" class="tile is-current" role="tabpanel">
+        <h3>
+          <span class="version">v1.1.0 <span class="current-badge">CURRENT</span></span>
+          <time datetime="2025-12-27">Dec 27, 2025</time>
+        </h3>
+        <div class="sections">
+          <div>
+            <div class="section-title">✨ Additions &amp; Improvements</div>
+            <ul>
+              <li><strong>WebRTC Live Spectate</strong> - Watch players in real-time through a live stream of their screen.</li>
+              <li><strong>Global Search Shortcut</strong> - Press <strong>Page Down</strong> anywhere in the menu to instantly open the Player Page with the search bar auto-focused.</li>
+              <li><strong>Card-Style Layouts</strong> - Added to dashboard quick actions and player action lists for a cleaner, modern UI.</li>
+              <li><strong>List-Style Layouts</strong> - Added to vehicle, item, and resource lists for a more compact browsing experience.</li>
+              <li><strong>Themes Expansion</strong> - New color themes added to <strong>Settings</strong> for deeper UI customization.</li>
+              <li><strong>Jobs Page</strong> - Manage jobs (and gangs where supported) and view employee/member lists.</li>
+              <li><strong>Quick Action Icons</strong> - Fully customizable dashboard and player shortcuts with drag-to-reorder support.</li>
+              <li><strong>Unread Report Badges</strong> - Dashboard badges now display unread report and report-message counts.</li>
+              <li><strong>Player Map Skins</strong> - Added new <strong>Regular</strong> and <strong>Atlas</strong> styles.</li>
+              <li><strong>LB-Phone Support</strong> - Phone numbers now display correctly when using LB-Phone.</li>
+              <li><strong>New Permission Exports</strong>
+                <ul>
+                  <li><a href="https://sinatra.gitbook.io/919design/paid-resources/quickstart/exports#setplayerpermissiongroup-server-side" target="_blank" rel="noopener noreferrer">SetPlayerPermissionGroup</a></li>
+                  <li><a href="https://sinatra.gitbook.io/919design/paid-resources/quickstart/exports#removeplayerpermissiongroup-server-side" target="_blank" rel="noopener noreferrer">RemovePlayerPermissionGroup</a></li>
+                </ul>
+              </li>
+              <li><strong>kibook's Weathersync Integration</strong> - Full compatibility added.</li>
+              <li><strong>cd_garage Support</strong> - Vehicle key integration now supported.</li>
+              <li><strong>cd_easytime Integration</strong> - Time and weather controls now supported <em>(latest GitHub version required)</em>.</li>
+              <li><strong>jaksam's Vehicle Keys Support</strong> - Vehicle keys now apply correctly when using this system.</li>
+              <li><strong>Config.HidePlayerInNoClip</strong> - Option added to hide the player ped while in noclip mode.</li>
+              <li><strong>Standalone Mode</strong> - 919ADMIN PRO can now run <strong>without framework dependencies</strong>.</li>
+              <li><strong>Granular Addon Permissions</strong> - Each addon now has its own assignable permission key.</li>
+              <li><strong>Expanded Logging</strong>
+                <ul>
+                  <li>Item spawning / giving (self + others)</li>
+                  <li>Vehicle spawning / giving (self + others)</li>
+                </ul>
+              </li>
+              <li><strong>Discord Log Webhook Routing</strong> - Added more granular routing options for log categories.</li>
+              <li><strong>Entity Inspector Upgrade</strong> - Added <strong>First Owner</strong> field via <code>NetworkGetFirstEntityOwner</code>.</li>
+              <li><strong>Optimized Assets</strong> - Player map skins converted to <strong>WEBP</strong> and unused files removed.</li>
+              <li><strong>Discord Role Syncing</strong> - Roles now refresh <strong>on every player join</strong>, removing restart requirement when removing roles.</li>
+              <li><strong>Simplified Time Commands</strong> - Time can now be set using only an hour value (e.g., <code>"12"</code> or <code>"22"</code>).</li>
+              <li><strong>Message All Update</strong> - Now uses a <strong>txAdmin-style on-screen notification</strong> instead of chat-only messaging.</li>
+              <li><strong>Customizable Report Command</strong> - The report command is now configurable.</li>
+              <li><strong>Report Notification Sound</strong> - A sound now plays when a new report is received.</li>
+              <li><strong>Player Report Chat Flow</strong> - Report messages from staff no longer auto-focus the chat. Players are now prompted to press <strong>END</strong> to manually open and focus the report chat.</li>
+              <li><strong>Analytics Update</strong> - The Tebex stats page has been moved into the Analytics page.</li>
+              <li><strong>Install Status Rewrite</strong> - Now determined dynamically based on database tables + at least one superadmin (no longer stored in server KVP).</li>
+              <li><strong>Editable Server Name</strong> - SuperAdmin users can now edit the server name directly from the dashboard, no longer requiring a re-install.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-title">🐛 Fixes</div>
+            <ul>
+              <li>Improved background thread handling for player name tags, increasing overall stability.</li>
+              <li>Updated spectate logic to use synchronous callbacks, preventing race conditions.</li>
+              <li>Fixed phone numbers displaying as UNKNOWN on QB/QBox.</li>
+              <li>Fixed the "Set Me Driver" quick action.</li>
+              <li>Resolved issues with "Add Car to Garage" on QBCore-based servers.</li>
+              <li>Fixed "Send Back / Go Back" functionality.</li>
+              <li>Applied multiple visual fixes to light UI themes.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callouts">
+          <div class="callout is-danger"><strong>FULL REINSTALL required.</strong> Fully delete <strong>amzn_admin</strong> from your resources folder and drag-and-drop the new <strong>amzn_admin</strong> from Cfx Portal/Keymaster. You will not have to do the install wizard again; install status is saved via database state and your tables stay.</div>
+        </div>
+      </article>
+
+      <article id="release-v104" class="tile" role="tabpanel" hidden>
+        <h3>
+          <span class="version">v1.0.4</span>
+          <time datetime="2025-11-02">Nov 2, 2025</time>
+        </h3>
+        <div class="sections">
+          <div>
+            <div class="section-title">🐛 Fixes</div>
+            <ul>
+              <li>Resolved an issue where new localizations were not being detected.</li>
+              <li>Corrected ban durations so hours are now calculated properly, instead of being interpreted as minutes.</li>
+              <li>Fixed the screenshot feature so screenshots now display correctly.</li>
+              <li>Fixed a problem where integration autodetect would incorrectly report failure even when integrations were working.</li>
+              <li>Fixed an error with giving or removing cash/bank in ESX.</li>
+              <li>Fixed an issue where assigning vehicle ownership from the vehicles list would place the vehicle in the wrong garage.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-title">➕ Additions</div>
+            <ul>
+              <li>Introduced a new setting: SeeThrough Mode.</li>
+              <li>Added quick settings to the bottom of the navbar (under the version) for muting sounds and toggling SeeThrough mode.</li>
+              <li>Added the ability to hide specific pages (Tebex, Reports, etc) from the admin menu via config.lua.</li>
+              <li>Added an option in config.lua to disable displaying player IP addresses in the admin menu.</li>
+              <li>Added a new QuickAction to the Dashboard: Set Vehicle Color.</li>
+              <li>Added a View Player button to the reports page, enabling quick actions on players who submit reports.</li>
+              <li>Added a new server-side export: GetPlayerPermissionGroup.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-title">✨ Improvements</div>
+            <ul>
+              <li>919ADMIN PRO now includes a STANDALONE mode and can run on servers without any framework.</li>
+              <li>Added detailed logging for spawning/giving items from the Items page (self + others).</li>
+              <li>Added detailed logging for spawning/giving vehicles from the Vehicles page (self + others).</li>
+              <li>Entity Inspector Addon: added First Owner using NetworkGetFirstEntityOwner.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-title">➖ Removals</div>
+            <ul>
+              <li>The original CheckPermission export has been removed in favor of GetPlayerPermissionGroup.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callouts">
+          <div class="callout is-danger"><strong>FULL REINSTALL required.</strong> Fully delete <strong>amzn_admin</strong> from your resources folder and drag-and-drop the new <strong>amzn_admin</strong> from Cfx Portal/Keymaster. You will not have to do the install wizard again; installation status is persisted and your tables stay.</div>
+        </div>
+      </article>
+
+      <article id="release-v103" class="tile" role="tabpanel" hidden>
+        <h3>
+          <span class="version">v1.0.3</span>
+          <time datetime="2025-09-21">Sep 21, 2025</time>
+        </h3>
+        <div class="sections">
+          <div>
+            <div class="section-title">✨ Improvements</div>
+            <ul>
+              <li>The Player List is now always sorted by player ID (source) ascending.</li>
+              <li>The Player List can now be searched by player ID (source).</li>
+              <li>The spectate feature now checks the routing bucket of the target player and changes it accordingly.</li>
+              <li>Increased speed of menu opening and initial draw.</li>
+              <li>Minor menu style improvements.</li>
+              <li>Players with access to the admin menu are now immune to bans.</li>
+              <li>Made getting vehicle keys when spawning vehicles more reliable (server waits for vehicle to exist before attempting to give keys).</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-title">🐛 Fixes</div>
+            <ul>
+              <li>Fixed an issue that prevented loading of the items list sometimes for some users.</li>
+              <li>Implemented a potential fix for giving items not working when typing in the number, rather than using scroll wheel.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-title">➕ Additions</div>
+            <ul>
+              <li>Added Admin Tag quick action to display your admin menu permission rank as a tag.</li>
+              <li>Added Add Car to Garage player action to add a player's current vehicle and its props to their garage.</li>
+              <li>Privileged users are now highlighted in the Player List (SuperAdmin - red, other groups - yellow).</li>
+              <li>Added Open Inventory to open the inventory of a player side-by-side like 919ADMIN CLASSIC.</li>
+              <li>Added an integration for qs-vehiclekeys.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callouts">
+            <div class="callout is-danger"><strong>FULL REINSTALL required.</strong> Fully delete <strong>amzn_admin</strong> from your resources folder and drag-and-drop the new <strong>amzn_admin</strong> from Cfx Portal/Keymaster. You will not have to do the install wizard again; installation status is persisted and your tables stay.</div>
+          </div>
+      </article>
+
+      <article id="release-v102" class="tile" role="tabpanel" hidden>
+        <h3>
+          <span class="version">v1.0.2</span>
+          <time datetime="2025-09-21">Sep 21, 2025</time>
+        </h3>
+        <div class="sections">
+          <div>
+            <div class="section-title">✨ Improvements</div>
+            <ul class="is-cols">
+              <li>Modules restructured into modules and modules_editable folders.</li>
+              <li>config_s.lua and config_c.lua coalesced into config.lua (server-only).</li>
+              <li>Custom quick actions and player actions can now be added.</li>
+              <li>Added server export exports.amzn_admin:CheckPermission(source, permission) for integrations.</li>
+              <li>The report command can now be disabled in config.lua.</li>
+              <li>Deleting a character on the characters list now has a confirmation modal.</li>
+              <li>Improved performance of all scrolling lists by reducing composite layer overhead.</li>
+              <li>Improved noclip/freecam: player cannot be seen while in freecam; ped stays in place and camera uses focus natives.</li>
+              <li>When exiting noclip/freecam, your ped/vehicle teleports to ground position of the freecam.</li>
+              <li>Players on the map page can now be clicked to go to player info &amp; actions.</li>
+              <li>Improved the UFO Attack player action.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-title">🐛 Fixes</div>
+            <ul>
+              <li>Fixed Qbox bans sometimes not picking up license2.</li>
+              <li>Fixed ESX player list failing to load if players haven't chosen a character yet.</li>
+              <li>Fixed player list load failing if opened when target player hasn't chosen a character yet.</li>
+              <li>Fixed spectate feature navigation (&lt; left and &gt; right).</li>
+              <li>Fixed revive integration on qb-core with qb-ambulancejob.</li>
+              <li>Fixed doubled up revive self quick action.</li>
+              <li>Fixed items list showing 0 items with ESX and default ESX inventory.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-title">➕ Additions</div>
+            <ul>
+              <li>Added Interface Layout setting: left anchored, right anchored, floating (drag + resize).</li>
+              <li>Added Text Size setting: default, small, smaller.</li>
+              <li>Added GetKeys quick action to get keys for the vehicle you are sitting in.</li>
+              <li>Added offline bans to the characters list screen.</li>
+              <li>Added AdvancedParking integration for deleting vehicle entities.</li>
+              <li>Added fun category player actions: Copy Ped To Me, Clone Attack.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callouts">
+          <div class="callout is-danger"><strong>FULL REINSTALL required.</strong> Fully delete <strong>amzn_admin</strong> from your resources folder and drag-and-drop the new <strong>amzn_admin</strong> from Cfx Portal/Keymaster. You will not have to do the install wizard again; installation status is persisted and your tables stay.</div>
+        </div>
+      </article>
+
+      <article id="release-v101" class="tile" role="tabpanel" hidden>
+        <h3>
+          <span class="version">v1.0.1</span>
+          <time datetime="2025-09-12">Sep 12, 2025</time>
+        </h3>
+        <div class="sections">
+          <div>
+            <div class="section-title">✨ Improvements</div>
+            <ul>
+              <li>Reports now give a New report! notification to whoever has the page:Reports permission.</li>
+              <li>Admin chats now notify other admins with the page:AdminChat permission.</li>
+              <li>Improved the bridge module again and added/improved a bunch of integrations.</li>
+              <li>Shift+Click Add Car to Garage integrates with jg-advancedgarages.</li>
+              <li>Improved items list hover details (spawn code, weight).</li>
+              <li>Added Ctrl+Click to items/vehicles list to copy spawn code.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-title">🐛 Fixes</div>
+            <ul>
+              <li>Fixed users being assigned a non-existent permission group by Discord permissions causing empty pages; now warns in console.</li>
+              <li>Fixed non-admins getting NUI focus when pressing the 919 admin key.</li>
+              <li>Fixed permission mismatch when giving/removing bank money.</li>
+              <li>Fixed viewing inventories on QBCore with qb-inventory.</li>
+              <li>Fixed giving clothing menu to other players.</li>
+              <li>Fixed player names feature not working / erroring on QB &amp; ESX.</li>
+              <li>Fixed MrNewbVehicleKeys integration (receiving keys for a nil vehicle).</li>
+              <li>page:DeveloperTools permission renamed to page:Addons.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callouts">
+          <div class="callout is-warn"><strong>UPDATE RECOMMENDED.</strong> A large number of issues (including the player-facing NUI focus issue) were fixed in this update.</div>
+          <div class="callout is-danger"><strong>FULL REINSTALL required.</strong> Fully delete <strong>amzn_admin</strong> from your resources folder and drag-and-drop the new <strong>amzn_admin</strong> from Cfx Portal/Keymaster. You will not have to do the install wizard again; installation status is persisted and your tables stay.</div>
+        </div>
+      </article>
+
+      <article id="release-v100" class="tile" role="tabpanel" hidden>
+        <h3>
+          <span class="version">v1.0.0 (Day One Patch)</span>
+          <time datetime="2025-09-02">Sep 2, 2025</time>
+        </h3>
+        <div class="sections">
+          <div>
+            <div class="section-title">✨ Improvements</div>
+            <ul>
+              <li>Character list page fully reimagined from pre-release and now works as expected.</li>
+              <li>Screenshot feature is fully implemented and works in-menu.</li>
+              <li>Implemented FiveManage logging alongside Discord logs.</li>
+              <li>Major improvements to the bridge module; added missing integrations (items list, etc).</li>
+              <li>Increased max menu width to 60% of the screen.</li>
+              <li>Removed left-over debug prints.</li>
+              <li>Updated README with prerequisites and how to reset your 919ADMIN PRO installation.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-title">🐛 Fixes</div>
+            <ul>
+              <li>Fixed the Send To Location feature.</li>
+              <li>Fixed an error from undefined data returned by the Tebex API in the Tebex page.</li>
+              <li>Fixed an error from the logging module related to improper framework detection (was assuming Qbox).</li>
+              <li>Fixed issues with Discord role permissions; ordering is now respected.</li>
+              <li>Discord-permissioned users now show in the permissioned user list (online only).</li>
+              <li>Set the /reset919install command to only work from the server console.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callouts">
+          <div class="callout is-warn"><strong>UPDATE RECOMMENDED.</strong> The prior build was pre-release (over 1 week old) and contained major issues, including an exposed /resetinstall command (renamed to /reset919install and restricted to server console in this update).</div>
+          <div class="callout is-danger"><strong>FULL REINSTALL required.</strong> Fully delete <strong>amzn_admin</strong> from your resources folder and drag-and-drop the new <strong>amzn_admin</strong> from Cfx Portal/Keymaster. You will not have to do the install wizard again; installation status is persisted and your tables stay.</div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 919DESIGN — FiveM Server Management Products. All rights reserved.
+  </footer>
+
+  <script>
+    (function(){
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.version-nav__item[role="tab"]'));
+      var panels = Array.prototype.slice.call(document.querySelectorAll('article.tile[role="tabpanel"]'));
+
+      function show(targetId){
+        tabs.forEach(function(t){
+          t.setAttribute('aria-selected', t.dataset.target === targetId ? 'true' : 'false');
+        });
+        panels.forEach(function(p){
+          p.hidden = p.id !== targetId;
+        });
+      }
+
+      tabs.forEach(function(t){
+        t.addEventListener('click', function(){ show(t.dataset.target); });
+      });
+
+      document.querySelector('.version-nav').addEventListener('keydown', function(e){
+        var idx = tabs.findIndex(function(t){ return t.getAttribute('aria-selected') === 'true'; });
+        if(e.key === 'ArrowRight' || e.key === 'ArrowDown'){
+          e.preventDefault();
+          var next = Math.min(tabs.length - 1, idx + 1);
+          show(tabs[next].dataset.target);
+          tabs[next].focus();
+        }else if(e.key === 'ArrowLeft' || e.key === 'ArrowUp'){
+          e.preventDefault();
+          var prev = Math.max(0, idx - 1);
+          show(tabs[prev].dataset.target);
+          tabs[prev].focus();
+        }else if(e.key === 'Home'){
+          e.preventDefault();
+          show(tabs[0].dataset.target);
+          tabs[0].focus();
+        }else if(e.key === 'End'){
+          e.preventDefault();
+          show(tabs[tabs.length - 1].dataset.target);
+          tabs[tabs.length - 1].focus();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

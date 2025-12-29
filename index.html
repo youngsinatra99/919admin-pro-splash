@@ -90,8 +90,6 @@
   </script>
   
 <body class="animated-bg">
-  <div class="xmas-lights" aria-hidden="true"></div>
-  <div class="xmas-snow" aria-hidden="true"></div>
   <header>
     <div class="brand">
       <img src="nineonenine.png" class="logo" aria-hidden="true" />
@@ -99,12 +97,13 @@
     <nav class="nav" aria-label="Primary">
             <a class="gold-cta" href="https://store.nineonenine.design/checkout/packages/add/7003602/single" role="button" aria-label="Purchase now — $59.99 USD">
               <span class="gold-cta__glow" aria-hidden="true"></span>
-              <span class="gold-cta__sticker" aria-hidden="true">$59.99 USD</span>
+              
               <span class="gold-cta__inner">
                 <span class="gold-cta__label">PURCHASE NOW</span>
               </span>
             </a>
       <a class="btn primary" href="https://sinatra.gitbook.io/919design/paid-resources/quickstart" target="_blank" rel="noopener noreferrer" aria-label="Read Documentation">Documentation</a>
+      <a class="btn primary" href="changelog/index.html" aria-label="View Changelog">Changelog</a>
       <a class="btn primary" data-discord-link="true" href="https://discord.gg/Xv7faqUXUf" target="_blank" rel="noopener noreferrer">Join our Discord</a>
     </nav>
   </header>
@@ -112,15 +111,15 @@
   <main>
     <section class="hero" aria-label="Hero">
       <div class="copy">
-        <div class="coming-soon" role="status" aria-label="NOW AVAILABLE">
-          <span class="pill is-available">NOW AVAILABLE</span>
+        <div class="coming-soon" role="status" aria-label="v1.1.0 NOW AVAILABLE">
+          <span class="pill is-available">v1.1.0 NOW AVAILABLE</span>
         </div>
         <h2 class="title">
           Find your <span class="fivem-text">COLORS</span> with
           <span class="gradient-text">PRO</span>.
         </h2>
         <p class="subtitle">
-          <strong>919ADMIN PRO</strong> is a next-gen FiveM admin menu built for speed, clarity, and control. Designed with a modern, reactive UI that feels as fast as you play.
+          <strong>919ADMIN PRO</strong> is a next-gen FiveM admin menu built for speed, clarity, and control. Designed with a modern, reactive UI that feels as fast as you play. <a href="changelog/index.html" style="color: rgba(0,229,255,0.95); text-decoration: underline; text-decoration-color: rgba(0,229,255,0.35); text-underline-offset: 2px; font-weight: 700;">See what's new in v1.1.0 →</a>
         </p>
         <div class="feature-bullets carousel" role="list" aria-roledescription="carousel" aria-label="Key features">
           <div class="carousel-track" style="transform: translateX(0%);" aria-live="polite">
@@ -190,7 +189,7 @@
         <div class="cta-row">
           <a class="gold-cta" href="https://store.nineonenine.design/checkout/packages/add/7003602/single" role="button" aria-label="Purchase now — $59.99 USD">
             <span class="gold-cta__glow" aria-hidden="true"></span>
-            <span class="gold-cta__sticker" aria-hidden="true">$59.99 USD</span>
+
             <span class="gold-cta__inner">
               <span class="gold-cta__label">PURCHASE NOW</span>
             </span>
@@ -218,6 +217,7 @@
  
         <!-- Screenshot rotator (1x1, fades between images) -->
         <div class="screenshot-rotator" aria-label="Screenshots rotator">
+          <div class="new-ribbon" aria-label="New Update">NEW UPDATE</div>
           <img src="ss1.png" alt="919ADMIN PRO screenshot 1" />
           <img src="ss2.png" alt="919ADMIN PRO screenshot 2" />
           <img src="ss3.png" alt="919ADMIN PRO screenshot 3" />
@@ -720,50 +720,5 @@
     })();
   </script>
 
-  <script>
-    // Christmas FX: snow + lights (disabled if prefers-reduced-motion)
-    (function(){
-      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(reduce) return;
-
-      // Lights
-      const lights = document.querySelector('.xmas-lights');
-      if(lights && !lights.dataset.built){
-        lights.dataset.built = '1';
-        const colors = ['#ff3d7f', '#00e5ff', '#7c4dff', '#ffdd55', '#22c55e'];
-        const count = 28;
-        for(let i=0;i<count;i++){
-          const b = document.createElement('span');
-          b.className = 'xmas-lights__bulb';
-          b.style.left = `${(i/(count-1))*100}%`;
-          b.style.setProperty('--bulb', colors[i % colors.length]);
-          b.style.animationDelay = `${(i % 7) * 120}ms`;
-          lights.appendChild(b);
-        }
-      }
-
-      // Snow
-      const snow = document.querySelector('.xmas-snow');
-      if(snow && !snow.dataset.built){
-        snow.dataset.built = '1';
-        const flakes = 55;
-        for(let i=0;i<flakes;i++){
-          const f = document.createElement('span');
-          f.className = 'xmas-snow__flake';
-          const x = Math.random() * 100;
-          const size = 2 + Math.random() * 4.5;
-          const dur = 8 + Math.random() * 10;
-          const delay = -Math.random() * dur;
-          const drift = (Math.random() * 60) - 30;
-          f.style.left = `${x}%`;
-          f.style.setProperty('--s', `${size}px`);
-          f.style.setProperty('--d', `${dur}s`);
-          f.style.setProperty('--delay', `${delay}s`);
-          f.style.setProperty('--drift', `${drift}px`);
-          snow.appendChild(f);
-        }
-      }
-    })();
-  </script>
 </body>
 </html>
